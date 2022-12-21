@@ -1,0 +1,185 @@
+$let[mc;$awaitmenu[What is your first premise?
+{title: Premise 1}
+{menu:
+{id=p1}
+{placeholder=Select}
+{min=1}
+{max=1}
+{label=all A is B}
+{value=1}
+{label=no A is B}
+{value=2}
+{label=some A is B}
+{value=3}
+{label=some A is not B}
+{value=4}
+{label=x is A}
+{value=5}
+{label=x is not A}
+{value=6}
+{label=x is y}
+{value=7}
+{label=x is not y}
+{value=8}
+}
+;;30s;p1]
+$if[$get[mc]==1]
+    $sendMessage[Your first premise is: all A is B.]
+    $let[p1;1]
+    $elseIf[$get[mc]==2]
+        $sendMessage[Your first premise is: no A is B.]
+        $let[p1;2]
+    $endelseIf
+    $elseIf[$get[mc]==3]
+        $sendMessage[Your first premise is: some A is B.]
+        $let[p1;3]
+    $endelseIf
+    $elseIf[$get[mc]==4]
+        $sendMessage[Your first premise is: some A is not B.]
+        $let[p1;4]
+    $endelseIf
+    $elseIf[$get[mc]==5]
+        $sendMessage[Your first premise is: x is A.]
+        $let[p1;5]
+    $endelseIf
+    $elseIf[$get[mc]==6]
+        $sendMessage[Your first premise is: x is not A.]
+        $let[p1;6]
+    $endelseIf
+    $elseIf[$get[mc]==7]
+        $sendMessage[Your first premise is: x is y.]
+        $let[p1;7]
+    $endelseIf
+    $elseIf[$get[mc]==8]
+        $sendMessage[Your first premise is: x is not y.]
+        $let[p1;8]
+    $endelseIf
+    $elseIf[$get[mc]==undefined]
+        $sendMessage[Error. Please make a selection next time!]
+    $endelseIf
+    $else
+    $sendMessage[Unknown error. Please review code.]
+$endIf
+$let[mc;$awaitmenu[What is your second premise?
+{title: Premise 2}
+{menu:
+{id=p2}
+{placeholder=Select}
+{min=1}
+{max=1}
+{label=all A is B}
+{value=1}
+{label=no A is B}
+{value=2}
+{label=some A is B}
+{value=3}
+{label=some A is not B}
+{value=4}
+{label=x is A}
+{value=5}
+{label=x is not A}
+{value=6}
+{label=x is y}
+{value=7}
+{label=x is not y}
+{value=8}
+{label=None}
+{value=9}
+}
+;;30s;p2]
+$if[$get[mc]==1]
+    $sendMessage[Your second premise is: all A is B.]
+    $let[p2;1]
+    $elseIf[$get[mc]==2]
+        $sendMessage[Your second premise is: no A is B.]
+        $let[p2;2]
+    $endelseIf
+    $elseIf[$get[mc]==3]
+        $sendMessage[Your second premise is: some A is B.]
+        $let[p2;3]
+    $endelseIf
+    $elseIf[$get[mc]==4]
+        $sendMessage[Your second premise is: some A is not B.]
+        $let[p2;4]
+    $endelseIf
+    $elseIf[$get[mc]==5]
+        $sendMessage[Your second premise is: x is A.]
+        $let[p2;5]
+    $endelseIf
+    $elseIf[$get[mc]==6]
+        $sendMessage[Your second premise is: x is not A.]
+        $let[p2;6]
+    $endelseIf
+    $elseIf[$get[mc]==7]
+        $sendMessage[Your second premise is: x is y.]
+        $let[p2;7]
+    $endelseIf
+    $elseIf[$get[mc]==8]
+        $sendMessage[Your second premise is: x is not y.]
+        $let[p2;8]
+    $endelseIf
+    $elseIf[$get[mc]==9]
+        $let[mc;$awaitMenu[What is your conclusion?
+        {title: Conclusion}
+        {menu:
+        {id=c}
+        {placeholder=Select}
+        {min=1}
+        {max=1}
+        {label=all A is B}
+        {value=1}
+        {label=no A is B}
+        {value=2}
+        {label=some A is B}
+        {value=3}
+        {label=some A is not B}
+        {value=4}
+        {label=x is A}
+        {value=5}
+        {label=x is not A}
+        {value=6}
+        {label=x is y}
+        {value=7}
+        {label=x is not y}
+        {value=8}
+        }
+        ;;30s;c]
+        $if[$get[mc]==1]
+            $sendMessage[Your conclusion is: all A is B.]
+            $let[p1;1]
+            $elseIf[$get[mc]==2]
+                $sendMessage[Your conclusion is: no A is B.]
+                $let[p1;2]
+            $endelseIf
+            $elseIf[$get[mc]==3]
+                $sendMessage[Your conclusion is: some A is B.]
+                $let[p1;3]
+            $endelseIf
+            $elseIf[$get[mc]==4]
+                $sendMessage[Your conclusion is: some A is not B.]
+                $let[p1;4]
+            $endelseIf
+            $elseIf[$get[mc]==5]
+                $sendMessage[Your conclusion is: x is A.]
+                $let[p1;5]
+            $endelseIf
+            $elseIf[$get[mc]==6]
+                $sendMessage[Your conclusion is: x is not A.]
+                $let[p1;6]
+            $endelseIf
+            $elseIf[$get[mc]==7]
+                $sendMessage[Your conclusion is: x is y.]
+                $let[p1;7]
+            $endelseIf
+            $elseIf[$get[mc]==8]
+                $sendMessage[Your conclusion is: x is not y.]
+                $let[p1;8]
+            $endelseIf
+            $elseIf[$get[mc]==undefined]
+                $sendMessage[Error. Please make a selection next time!]
+            $endelseIf
+            $else
+            $sendMessage[Unknown error. Please review code.]
+        $endIf
+        $sendMessage[Your final argument is:
+$endIf
