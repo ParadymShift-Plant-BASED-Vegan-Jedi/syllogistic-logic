@@ -85,31 +85,31 @@ $if[bc==n]
         $sendMessage[Your conclusion form is: all A is B.]
         $let[cf;1]
         $elseIf[$get[mc]==2]
-            $sendMessage[Your first premise is: no A is B.]
+            $sendMessage[Your conclusion forn is: no A is B.]
             $let[cf;2]
         $endelseIf
         $elseIf[$get[mc]==3]
-            $sendMessage[Your first premise is: some A is B.]
+            $sendMessage[Your conclusion form is: some A is B.]
             $let[cf;3]
         $endelseIf
         $elseIf[$get[mc]==4]
-            $sendMessage[Your first premise is: some A is not B.]
+            $sendMessage[Your conclusion form is: some A is not B.]
             $let[cf;4]
         $endelseIf
         $elseIf[$get[mc]==5]
-            $sendMessage[Your first premise is: x is A.]
+            $sendMessage[Your conclusion form is: x is A.]
             $let[cf;5]
         $endelseIf
         $elseIf[$get[mc]==6]
-            $sendMessage[Your first premise is: x is not A.]
+            $sendMessage[Your conclusion form is: x is not A.]
             $let[cf;6]
         $endelseIf
         $elseIf[$get[mc]==7]
-            $sendMessage[Your first premise is: x is y.]
+            $sendMessage[Your conclusion form is: x is y.]
             $let[cf;7]
         $endelseIf
         $elseIf[$get[mc]==8]
-            $sendMessage[Your first premise is: x is not y.]
+            $sendMessage[Your conclusion form is: x is not y.]
             $let[cf;8]
         $endelseIf
         $elseIf[$get[mc]==undefined]
@@ -118,6 +118,7 @@ $if[bc==n]
         $else
         $sendMessage[Unknown error. Please review code.]
     $endIf
+    $let[mt1;$awaitMessage[
 $let[mc;$awaitMenu[Let's create your first premise. What is tne first operator of premise 1?
 {title: Premise 1}
 {menu:
