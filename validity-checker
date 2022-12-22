@@ -1,3 +1,92 @@
+$objectCreate[
+{
+"A":"1",
+"B":"2",
+"C":"3",
+"D":"4",
+"E":"5",
+"F":"6",
+"G":"7",
+"H":"8",
+"I":"9",
+"J":"10",
+"K":"11",
+"L":"12",
+"M":"13",
+"N":"14",
+"O":"15",
+"P":"16",
+"Q":"17",
+"R":"18",
+"S":"19",
+"T":"20",
+"U":"21",
+"V":"22",
+"W":"23",
+"X":"24",
+"Y":"25",
+"Z":"26",
+"a":"1s",
+"b":"2s",
+"c":"3s",
+"d":"4s",
+"e":"5s",
+"f":"6s",
+"g":"7s",
+"h":"8s",
+"i":"9s",
+"j":"10s",
+"k":"11s",
+"l":"12s",
+"m":"13s",
+"n":"14s",
+"o":"15s",
+"p":"16s",
+"q":"17s",
+"r":"18s",
+"s":"19s",
+"t":"20s",
+"u":"21s",
+"v":"22s",
+"w":"23s",
+"x":"24s",
+"y":"25s",
+"z":"26s"
+}
+]
+$let[mc;$awaitMenu[Let's create your first premise. What is tne first operator of premise 1?
+{title: Premise 1}
+{menu:
+{id=p1o1}
+{placeholder=Select}
+{min=1}
+{max=1}
+{label=all}
+{value=all}
+{label=no}
+{value=no}
+{label=some}
+{value=some}
+{label=None}
+{value=none}
+}
+;;30s;p1o1]
+$
+
+/* OLD CODE
+
+$objectCreate[
+{
+"1":"all A is B",
+"2":"no A is B",
+"3":"some A is B",
+"4":"some A is not B",
+"5":"x is A",
+"6":"x is not A",
+"7":"x is y",
+"8":"x is not y"
+}
+]
 $let[mc;$awaitmenu[What is your first premise?
 {title: Premise 1}
 {menu:
@@ -146,34 +235,34 @@ $if[$get[mc]==1]
         ;;30s;c]
         $if[$get[mc]==1]
             $sendMessage[Your conclusion is: all A is B.]
-            $let[p1;1]
+            $let[c;1]
             $elseIf[$get[mc]==2]
                 $sendMessage[Your conclusion is: no A is B.]
-                $let[p1;2]
+                $let[c;2]
             $endelseIf
             $elseIf[$get[mc]==3]
                 $sendMessage[Your conclusion is: some A is B.]
-                $let[p1;3]
+                $let[c;3]
             $endelseIf
             $elseIf[$get[mc]==4]
                 $sendMessage[Your conclusion is: some A is not B.]
-                $let[p1;4]
+                $let[c;4]
             $endelseIf
             $elseIf[$get[mc]==5]
                 $sendMessage[Your conclusion is: x is A.]
-                $let[p1;5]
+                $let[c;5]
             $endelseIf
             $elseIf[$get[mc]==6]
                 $sendMessage[Your conclusion is: x is not A.]
-                $let[p1;6]
+                $let[c;6]
             $endelseIf
             $elseIf[$get[mc]==7]
                 $sendMessage[Your conclusion is: x is y.]
-                $let[p1;7]
+                $let[c;7]
             $endelseIf
             $elseIf[$get[mc]==8]
                 $sendMessage[Your conclusion is: x is not y.]
-                $let[p1;8]
+                $let[c;8]
             $endelseIf
             $elseIf[$get[mc]==undefined]
                 $sendMessage[Error. Please make a selection next time!]
@@ -182,4 +271,9 @@ $if[$get[mc]==1]
             $sendMessage[Unknown error. Please review code.]
         $endIf
         $sendMessage[Your final argument is:
+P1: $objectGet[$get[p1]]
+C: $objectGet[$get[c]]]
+        
 $endIf
+
+END OLD CODE */
