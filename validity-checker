@@ -85,7 +85,7 @@ $if[bc==n]
         $sendMessage[Your conclusion form is: all A is B.]
         $let[cf;1]
         $elseIf[$get[mc]==2]
-            $sendMessage[Your conclusion forn is: no A is B.]
+            $sendMessage[Your conclusion form is: no A is B.]
             $let[cf;2]
         $endelseIf
         $elseIf[$get[mc]==3]
@@ -137,26 +137,75 @@ $if[bc==n]
     $endIf
     $sendMessage[Your final argument is:
 ∴ $if[$get[cf]==1]all $get[ct1] is $get[ct2]$elseIf[$get[cf]==2]no $get[ct1] is $get[ct2]$endelseif$elseif[$get[cf]==3]some $get[ct1] is [$get[ct2]$endelseif$elseIf[$get[cf==4]some $get[ct1] is not $get[ct2]$endelseif$elseIf[$get[cf]==5]$get[ct1] is $get[ct2]$endelseif$elseIf[$get[cf]==6]$get[ct1] is not $get[ct2]$endelseif$elseIf[$get[cf]==7]$get[ct1] is $get[ct2]$endelseif$elseIf[$get[cf]==8]$get[ct1] is not $get[ct2]$endelseif$endIf]
-    $if[
-    
-$let[mc;$awaitMenu[Let's create your first premise. What is the first operator of premise 1?
-{title: Premise 1}
-{menu:
-{id=p1o1}
-{placeholder=Select}
-{min=1}
-{max=1}
-{label=all}
-{value=all}
-{label=no}
-{value=no}
-{label=some}
-{value=some}
-{label=None}
-{value=none}
-}
-;;30s;p1o1]
-$
+    $if[$get[cf]==1||$get[cf]==3||$get[cf]==5||$get[cf]==7]
+        $let[rc;1]
+        $elseIf[$get[cf]==2||$get[cf]==4||$get[cf]==6||$get[cf]==8]
+            $let[rc;0]
+        $endelseif
+    $endIf
+    $elseIf[$get[bc]==y]
+        $let[mc;$awaitMenu[Let's create your first premise. What is the form of premise 1?
+        {title: Premise 1 Form}
+        {menu:
+        {id=p1f}
+        {placeholder=Select}
+        {min=1}
+        {max=1}
+        {label=all A is B}
+        {value=1}
+        {label=no A is B}
+        {value=2}
+        {label=some A is B}
+        {value=3}
+        {label=some A is not B}
+        {value=4}
+        {label=x is A}
+        {value=5}
+        {label=x is not A}
+        {value=6}
+        {label=x is y}
+        {value=7}
+        {label=x is not y}
+        {value=8}
+        }
+        ;;30s;p1f]
+        $if[$get[mc]==1]
+            $sendMessage[Your premise 1 form is: all A is B.]
+            $let[p1f;1]
+            $elseIf[$get[mc]==2]
+                $sendMessage[Your premise 1 form is: no A is B.]
+                $let[p1f;2]
+            $endelseIf
+            $elseIf[$get[mc]==3]
+                $sendMessage[Your premise 1 form is: some A is B.]
+                $let[p1f;3]
+            $endelseIf
+            $elseIf[$get[mc]==4]
+                $sendMessage[Your premise 1 form is: some A is not B.]
+                $let[p1f;4]
+            $endelseIf
+            $elseIf[$get[mc]==5]
+                $sendMessage[Your premise 1 form is: x is A.]
+                $let[p1f;5]
+            $endelseIf
+            $elseIf[$get[mc]==6]
+                $sendMessage[Your premise 1 form is: x is not A.]
+                $let[p1f;6]
+            $endelseIf
+            $elseIf[$get[mc]==7]
+                $sendMessage[Your conclusion form is: x is y.]
+                $let[p1f;7]
+            $endelseIf
+            $elseIf[$get[mc]==8]
+                $sendMessage[Your premise 1 form is: x is not y.]
+                $let[p1f;8]
+            $endelseIf
+            $elseIf[$get[mc]==undefined]
+                $sendMessage[Error. Please make a selection next time!]
+            $endelseIf
+            $else
+            $sendMessage[Unknown error. Please review code.]
+        $endIf
 
 /* OLD CODE
 
