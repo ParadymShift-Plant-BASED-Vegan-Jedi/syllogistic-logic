@@ -114,9 +114,11 @@ $if[bc==n]
         $endelseIf
         $elseIf[$get[mc]==undefined]
             $sendMessage[Error. Please make a selection next time!]
+            $stop
         $endelseIf
         $else
         $sendMessage[Unknown error. Please review code.]
+        $stop
     $endIf
     $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
     $onlyIf[$charCount[$get[ct1]]==1;Please only include a single letter next time.]
@@ -145,25 +147,25 @@ $if[bc==n]
     $endIf
     $if[$get[cf]==1]
         $if[$get[ct1]==$get[ct2]]
-            $let[lc;true]
+            $let[flc;true]
             $else
-            $let[lc;false]
+            $let[flc;false]
         $endIf
         $elseIf[$get[cf]==2||$get[cf]==4||$get[cf]==6]
-            $let[lc;false]
+            $let[flc;false]
         $endelseif
         $elseIf[$get[cf]==3]
             $if[$get[ct1]==$get[ct2]]
-                $let[lc;false]
+                $let[flc;false]
                 $else
-                $let[lc;true]
+                $let[flc;true]
             $endIf
         $endelseif
         $elseIf[$get[cf]==5||$get[cf]==7||$get[cf]==8]
-            $let[lc;true]
+            $let[flc;true]
         $endelseif
     $endIf
-    $if[$get[lc]==true&&$get[rc]==1]
+    $if[$get[flc]==true&&$get[rc]==1]
         $let[result;valid]
         $else
         $let[result;invalid]
@@ -228,10 +230,30 @@ $if[bc==n]
             $endelseIf
             $elseIf[$get[mc]==undefined]
                 $sendMessage[Error. Please make a selection next time!]
+                $stop
             $endelseIf
             $else
             $sendMessage[Unknown error. Please review code.]
+            $stop
         $endIf
+        $let[pt1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
+        $onlyIf[$charCount[$get[pt1]]==1;Please only include a single letter next time.]
+        $let[pt2;$awaitMessage[What letter represents the second term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
+        $onlyIf[$charCount[$get[pt2]]==1;Please only include a single letter next time.]
+        $if[$get[p1f]<5]
+            $let[pt1;$toUppercase[$get[pt1]]]
+            $let[pt2;$toUppercase[$get[pt2]]]
+            $elseIf[$get[p1f]>4]
+                $let[pt1;$toUppercase[$get[pt1]]]
+                $if[$get[p1f]==5||$get[p1f]==6]
+                    $let[pt2;$toUppercase[$get[pt2]]]
+                    $elseIf[$get[p1f]==7||$get[p1f]==8]
+                        $let[pt2;$toLowercase[$get[pt2]]]
+                    $endelseif
+                $endIf
+            $endelseif
+        $endIf
+        
 
 /* OLD CODE
 
