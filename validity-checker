@@ -143,6 +143,8 @@ $if[bc==n]
             $let[rc;0]
         $endelseif
     $endIf
+    $if[$get[cf]==1]
+        $let[l1c;
     $elseIf[$get[bc]==y]
         $let[mc;$awaitMenu[Let's create your first premise. What is the form of premise 1?
         {title: Premise 1 Form}
