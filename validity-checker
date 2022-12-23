@@ -237,6 +237,7 @@ $if[bc==n]
                 $endIf
             $endelseif
         $endIf
+        $sendMessage[
         $let[bc;$awaitButton[Does your argument have a second premise?{button:Yes:GREEN::y}{button:No:RED::n};;20s;y;n]]
         $if[$get[bc]==n]
             $let[cf;$awaitmenu[What is the form of your conclusion?
@@ -312,7 +313,8 @@ $if[bc==n]
                     $endIf
                 $endelseif
             $endIf
-            
+            $sendMessage[Your final argument is: 
+P1: $if[$get[p1f]==
 
 /* OLD CODE
 
