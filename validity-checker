@@ -56,7 +56,7 @@ $objectCreate[
 ]
 $let[bc;$awaitButton[Does your argument have at least one premise?{button:Yes:GREEN::y}{button:No:RED::n};;30s;y;n]]
 $if[bc==n]
-    $let[$awaitmenu[What is the form of your conclusion?
+    $let[cf;$awaitmenu[What is the form of your conclusion?
     {title: Conclusion Form}
     {menu:
     {id=cf}
@@ -81,38 +81,30 @@ $if[bc==n]
     {value=8}
     }
     ;;30s;p1]
-    $if[$get[mc]==1]
+    $if[$get[cf]==1]
         $sendMessage[Your conclusion form is: all A is B.]
-        $let[cf;1]
-        $elseIf[$get[mc]==2]
+        $elseIf[$get[cf]==2]
             $sendMessage[Your conclusion form is: no A is B.]
-            $let[cf;2]
         $endelseIf
-        $elseIf[$get[mc]==3]
+        $elseIf[$get[cf]==3]
             $sendMessage[Your conclusion form is: some A is B.]
-            $let[cf;3]
         $endelseIf
-        $elseIf[$get[mc]==4]
+        $elseIf[$get[cf]==4]
             $sendMessage[Your conclusion form is: some A is not B.]
-            $let[cf;4]
         $endelseIf
-        $elseIf[$get[mc]==5]
+        $elseIf[$get[cf]==5]
             $sendMessage[Your conclusion form is: x is A.]
-            $let[cf;5]
         $endelseIf
-        $elseIf[$get[mc]==6]
+        $elseIf[$get[cf]==6]
             $sendMessage[Your conclusion form is: x is not A.]
-            $let[cf;6]
         $endelseIf
-        $elseIf[$get[mc]==7]
+        $elseIf[$get[cf]==7]
             $sendMessage[Your conclusion form is: x is y.]
-            $let[cf;7]
         $endelseIf
-        $elseIf[$get[mc]==8]
+        $elseIf[$get[cf]==8]
             $sendMessage[Your conclusion form is: x is not y.]
-            $let[cf;8]
         $endelseIf
-        $elseIf[$get[mc]==undefined]
+        $elseIf[$get[cf]==undefined]
             $sendMessage[Error. Please make a selection next time!]
             $stop
         $endelseIf
@@ -172,7 +164,7 @@ $if[bc==n]
     $endIf
     $sendMessage[Your argument is: $get[result].]  
     $elseIf[$get[bc]==y]
-        $let[mc;$awaitMenu[Let's create your first premise. What is the form of premise 1?
+        $let[p1f;$awaitMenu[Let's create your first premise. What is the form of premise 1?
         {title: Premise 1 Form}
         {menu:
         {id=p1f}
@@ -197,38 +189,30 @@ $if[bc==n]
         {value=8}
         }
         ;;30s;p1f]
-        $if[$get[mc]==1]
+        $if[$get[p1f]==1]
             $sendMessage[Your premise 1 form is: all A is B.]
-            $let[p1f;1]
-            $elseIf[$get[mc]==2]
+            $elseIf[$get[p1f]==2]
                 $sendMessage[Your premise 1 form is: no A is B.]
-                $let[p1f;2]
             $endelseIf
-            $elseIf[$get[mc]==3]
+            $elseIf[$get[[p1f]==3]
                 $sendMessage[Your premise 1 form is: some A is B.]
-                $let[p1f;3]
             $endelseIf
-            $elseIf[$get[mc]==4]
+            $elseIf[$get[p1f]==4]
                 $sendMessage[Your premise 1 form is: some A is not B.]
-                $let[p1f;4]
             $endelseIf
-            $elseIf[$get[mc]==5]
+            $elseIf[$get[p1f]==5]
                 $sendMessage[Your premise 1 form is: x is A.]
-                $let[p1f;5]
             $endelseIf
-            $elseIf[$get[mc]==6]
+            $elseIf[$get[p1f]==6]
                 $sendMessage[Your premise 1 form is: x is not A.]
-                $let[p1f;6]
             $endelseIf
-            $elseIf[$get[mc]==7]
+            $elseIf[$get[p1f]==7]
                 $sendMessage[Your conclusion form is: x is y.]
-                $let[p1f;7]
             $endelseIf
-            $elseIf[$get[mc]==8]
+            $elseIf[$get[p1f]==8]
                 $sendMessage[Your premise 1 form is: x is not y.]
-                $let[p1f;8]
             $endelseIf
-            $elseIf[$get[mc]==undefined]
+            $elseIf[$get[p1f]==undefined]
                 $sendMessage[Error. Please make a selection next time!]
                 $stop
             $endelseIf
@@ -236,24 +220,99 @@ $if[bc==n]
             $sendMessage[Unknown error. Please review code.]
             $stop
         $endIf
-        $let[pt1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
-        $onlyIf[$charCount[$get[pt1]]==1;Please only include a single letter next time.]
-        $let[pt2;$awaitMessage[What letter represents the second term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
-        $onlyIf[$charCount[$get[pt2]]==1;Please only include a single letter next time.]
+        $let[p1t1;$awaitMessage[What letter represents the first term of your first premise? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
+        $onlyIf[$charCount[$get[p1t1]]==1;Please only include a single letter next time.]
+        $let[p1t2;$awaitMessage[What letter represents the second term of your first premise? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
+        $onlyIf[$charCount[$get[p1t2]]==1;Please only include a single letter next time.]
         $if[$get[p1f]<5]
-            $let[pt1;$toUppercase[$get[pt1]]]
-            $let[pt2;$toUppercase[$get[pt2]]]
+            $let[p1t1;$toUppercase[$get[p1t1]]]
+            $let[p1t2;$toUppercase[$get[p1t2]]]
             $elseIf[$get[p1f]>4]
-                $let[pt1;$toUppercase[$get[pt1]]]
+                $let[p1t1;$toUppercase[$get[p1t1]]]
                 $if[$get[p1f]==5||$get[p1f]==6]
-                    $let[pt2;$toUppercase[$get[pt2]]]
+                    $let[p1t2;$toUppercase[$get[p1t2]]]
                     $elseIf[$get[p1f]==7||$get[p1f]==8]
-                        $let[pt2;$toLowercase[$get[pt2]]]
+                        $let[p1t2;$toLowercase[$get[p1t2]]]
                     $endelseif
                 $endIf
             $endelseif
         $endIf
-        
+        $let[bc;$awaitButton[Does your argument have a second premise?{button:Yes:GREEN::y}{button:No:RED::n};;20s;y;n]]
+        $if[$get[bc]==n]
+            $let[cf;$awaitmenu[What is the form of your conclusion?
+            {title: Conclusion Form}
+            {menu:
+            {id=cf}
+            {placeholder=Select}
+            {min=1}
+            {max=1}
+            {label=all A is B}
+            {value=1}
+            {label=no A is B}
+            {value=2}
+            {label=some A is B}
+            {value=3}
+            {label=some A is not B}
+            {value=4}
+            {label=x is A}
+            {value=5}
+            {label=x is not A}
+            {value=6}
+            {label=x is y}
+            {value=7}
+            {label=x is not y}
+            {value=8}
+            }
+            ;;30s;p1]
+            $if[$get[cf]==1]
+                $sendMessage[Your conclusion form is: all A is B.]
+                $elseIf[$get[cf]==2]
+                    $sendMessage[Your conclusion form is: no A is B.]
+                $endelseIf
+                $elseIf[$get[cf]==3]
+                    $sendMessage[Your conclusion form is: some A is B.]
+                $endelseIf
+                $elseIf[$get[cf]==4]
+                    $sendMessage[Your conclusion form is: some A is not B.]
+                $endelseIf
+                $elseIf[$get[cf]==5]
+                    $sendMessage[Your conclusion form is: x is A.]
+                $endelseIf
+                $elseIf[$get[cf]==6]
+                    $sendMessage[Your conclusion form is: x is not A.]
+                $endelseIf
+                $elseIf[$get[cf]==7]
+                    $sendMessage[Your conclusion form is: x is y.]
+                $endelseIf
+                $elseIf[$get[cf]==8]
+                    $sendMessage[Your conclusion form is: x is not y.]
+                $endelseIf
+                $elseIf[$get[cf]==undefined]
+                    $sendMessage[Error. Please make a selection next time!]
+                    $stop
+                $endelseIf
+                $else
+                $sendMessage[Unknown error. Please review code.]
+                $stop
+            $endIf
+            $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
+            $onlyIf[$charCount[$get[ct1]]==1;Please only include a single letter next time.]
+            $let[ct2;$awaitMessage[What letter represents the second term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
+            $onlyIf[$charCount[$get[ct2]]==1;Please only include a single letter next time.]
+            $if[$get[cf]<5]
+                $let[ct1;$toUppercase[$get[ct1]]]
+                $let[ct2;$toUppercase[$get[ct2]]]
+                $elseIf[$get[cf]>4]
+                    $let[ct1;$toUppercase[$get[ct1]]]
+                    $if[$get[cf]==5||$get[cf]==6]
+                        $let[ct2;$toUppercase[$get[ct2]]]
+                        $elseIf[$get[cf]==7||$get[cf]==8]
+                            $let[ct2;$toLowercase[$get[ct2]]]
+                        $endelseif
+                    $endIf
+                $endelseif
+            $endIf
+            
 
 /* OLD CODE
 
