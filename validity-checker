@@ -319,8 +319,22 @@ P1: $if[[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p
             $if[$get[cf]==1||$get[cf]==3||$get[cf]==5||$get[cf]==7]
                 $let[rc;$sum[$get[rc];1]]
             $endIf
+            $onlyIf[$get[rc]==1;Your argument is: invalid.]
             $if[$get[p1f]==1]
                 $let[$objectGet[$get[p1t1]]c;1]
+                $elseIf[$get[p1f]==2]
+                    $let[$objectGet[$get[p1t1]]c;1]
+                    $let[$objectGet[$get[p1t2]]c;1]
+                $endelseif
+                $elseIf[$get[p1f]==4||$get[p1f]==6]
+                    $let[$objectGet[$get[p1t2]]c;1]
+                $endelseif
+            $endIf
+            $if[$get[cf]==1]
+                $onlyIf[$get[$objectGet[$get[ct2]]c]==undefined;Your argument is: invalid.]
+                $let[$objectGet[$get[ct2]]c;1]
+                $onlyIf[
+                    
 
 /* OLD CODE
 
