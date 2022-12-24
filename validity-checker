@@ -105,12 +105,10 @@ $if[bc==n]
             $sendMessage[Your conclusion form is: x is not y.]
         $endelseIf
         $elseIf[$get[cf]==undefined]
-            $sendMessage[Error. Please make a selection next time!]
-            $stop
+            $stop[Error. Please make a selection next time!]
         $endelseIf
         $else
-        $sendMessage[Unknown error. Please review code.]
-        $stop
+        $stop[Unknown error. Please review code.]
     $endIf
     $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
     $onlyIf[$charCount[$get[ct1]]==1;Please only include a single letter next time.]
@@ -213,17 +211,15 @@ $if[bc==n]
                 $sendMessage[Your premise 1 form is: x is not y.]
             $endelseIf
             $elseIf[$get[p1f]==undefined]
-                $sendMessage[Error. Please make a selection next time!]
-                $stop
+                $stop[Error. Please make a selection next time!]
             $endelseIf
             $else
-            $sendMessage[Unknown error. Please review code.]
-            $stop
+            $stop[Unknown error. Please review code.]
         $endIf
         $let[p1t1;$awaitMessage[What letter represents the first term of your first premise? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
-        $onlyIf[$charCount[$get[p1t1]]==1;Please only include a single letter next time.]
+        $onlyIf[$charCount[$get[p1t1]]==1;Error. Please only include a single letter next time.]
         $let[p1t2;$awaitMessage[What letter represents the second term of your first premise? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
-        $onlyIf[$charCount[$get[p1t2]]==1;Please only include a single letter next time.]
+        $onlyIf[$charCount[$get[p1t2]]==1;Error. Please only include a single letter next time.]
         $if[$get[p1f]<5]
             $let[p1t1;$toUppercase[$get[p1t1]]]
             $let[p1t2;$toUppercase[$get[p1t2]]]
@@ -237,7 +233,7 @@ $if[bc==n]
                 $endIf
             $endelseif
         $endIf
-        $sendMessage[
+        $sendMessage[Your first premise is: $if[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p1t1] is $get[p1t2]$endelseif$elseif[$get[p1f]==3]some $get[p1t1] is [$get[p1t2]$endelseif$elseIf[$get[p1f==4]some $get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[[p1f]==5]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==6]$get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[p1f]==7]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==8]$get[p1t1] is not $get[p1t2]$endelseif$endIf]
         $let[bc;$awaitButton[Does your argument have a second premise?{button:Yes:GREEN::y}{button:No:RED::n};;20s;y;n]]
         $if[$get[bc]==n]
             $let[cf;$awaitmenu[What is the form of your conclusion?
@@ -289,17 +285,15 @@ $if[bc==n]
                     $sendMessage[Your conclusion form is: x is not y.]
                 $endelseIf
                 $elseIf[$get[cf]==undefined]
-                    $sendMessage[Error. Please make a selection next time!]
-                    $stop
+                    $stop[Error. Please make a selection next time!]
                 $endelseIf
                 $else
-                $sendMessage[Unknown error. Please review code.]
-                $stop
+                $stop[Unknown error. Please review code.]
             $endIf
             $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
-            $onlyIf[$charCount[$get[ct1]]==1;Please only include a single letter next time.]
+            $onlyIf[$charCount[$get[ct1]]==1;Error. Please only include a single letter next time.]
             $let[ct2;$awaitMessage[What letter represents the second term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
-            $onlyIf[$charCount[$get[ct2]]==1;Please only include a single letter next time.]
+            $onlyIf[$charCount[$get[ct2]]==1;Error. Please only include a single letter next time.]
             $if[$get[cf]<5]
                 $let[ct1;$toUppercase[$get[ct1]]]
                 $let[ct2;$toUppercase[$get[ct2]]]
