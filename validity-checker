@@ -333,7 +333,16 @@ P1: $if[[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p
             $if[$get[cf]==1]
                 $onlyIf[$get[$objectGet[$get[ct2]]c]==undefined;Your argument is: invalid.]
                 $let[$objectGet[$get[ct2]]c;1]
-                $onlyIf[
+                $elseIf[$get[cf==3]
+                    $onlyIf[$get[$objectGet[$get[ct1]]c]==undefined;Your argument is: invalid.]
+                    $let[$objectGet[$get[ct1]]c;1]
+                    $onlyIf[$get[$objectGet[$get[ct2]]c]==undefined;Your argument is: invalid.]
+                    $let[$objectGet[$get[ct2]]c;1]
+                $endelseif
+                $elseIf[$get[cf==4]
+                    $onlyIf[$objectGet[$get[ct1]]c
+                $onlyIf[all capital letter vals ==1]
+                your argument is valid
                     
 
 /* OLD CODE
