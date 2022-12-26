@@ -358,7 +358,7 @@ P1: $if[[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p
              $endIf
              $sendMessage[Your argument is: valid.]
              $elseIf[$get[bc]==y]
-                 $let[p2f;$awaitMenu[Let's create your first premise. What is the form of premise 1?
+                 $let[p2f;$awaitMenu[Let's create your second premise. What is the form of premise 2?
                  {title: Premise 2 Form}
                  {menu:
                  {id=p2form}
@@ -383,54 +383,54 @@ P1: $if[[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p
                  {value=8}
                  }
                  ;;30s;p2form]
-                 $if[$get[p1f]==1]
+                 $if[$get[p2f]==1]
                      $sendMessage[Your premise 1 form is: all A is B.]
-                     $elseIf[$get[p1f]==2]
+                     $elseIf[$get[p2f]==2]
                          $sendMessage[Your premise 1 form is: no A is B.]
                      $endelseIf
-                     $elseIf[$get[[p1f]==3]
+                     $elseIf[$get[[p2f]==3]
                          $sendMessage[Your premise 1 form is: some A is B.]
                      $endelseIf
-                     $elseIf[$get[p1f]==4]
+                     $elseIf[$get[p2f]==4]
                          $sendMessage[Your premise 1 form is: some A is not B.]
                      $endelseIf
-                     $elseIf[$get[p1f]==5]
+                     $elseIf[$get[p2f]==5]
                          $sendMessage[Your premise 1 form is: x is A.]
                      $endelseIf
-                     $elseIf[$get[p1f]==6]
+                     $elseIf[$get[p2f]==6]
                          $sendMessage[Your premise 1 form is: x is not A.]
                      $endelseIf
-                     $elseIf[$get[p1f]==7]
+                     $elseIf[$get[p2f]==7]
                          $sendMessage[Your conclusion form is: x is y.]
                      $endelseIf
-                     $elseIf[$get[p1f]==8]
+                     $elseIf[$get[p2f]==8]
                          $sendMessage[Your premise 1 form is: x is not y.]
                      $endelseIf
-                     $elseIf[$get[p1f]==undefined]
+                     $elseIf[$get[p2f]==undefined]
                          $stop[Error. Please make a selection next time!]
                      $endelseIf
                      $else
                      $stop[Unknown error. Please review code.]
                  $endIf
-                 $let[p1t1;$awaitMessage[What letter represents the first term of your first premise? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
+                 $let[p2t1;$awaitMessage[What letter represents the first term of your first premise? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
                  $onlyIf[$charCount[$get[p1t1]]==1;Error. Please only include a single letter next time.]
-                 $let[p1t2;$awaitMessage[What letter represents the second term of your first premise? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
+                 $let[p2t2;$awaitMessage[What letter represents the second term of your first premise? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
                  $onlyIf[$charCount[$get[p1t2]]==1;Error. Please only include a single letter next time.]
-                 $if[$get[p1f]<5]
-                     $let[p1t1;$toUppercase[$get[p1t1]]]
-                     $let[p1t2;$toUppercase[$get[p1t2]]]
-                     $elseIf[$get[p1f]>4]
-                         $let[p1t1;$toLowercase[$get[p1t1]]]
-                         $if[$get[p1f]==5||$get[p1f]==6]
-                             $let[p1t2;$toUppercase[$get[p1t2]]]
-                             $elseIf[$get[p1f]==7||$get[p1f]==8]
-                                 $let[p1t2;$toLowercase[$get[p1t2]]]
+                 $if[$get[p2f]<5]
+                     $let[p2t1;$toUppercase[$get[p2t1]]]
+                     $let[p2t2;$toUppercase[$get[p2t2]]]
+                     $elseIf[$get[p2f]>4]
+                         $let[p2t1;$toLowercase[$get[p2t1]]]
+                         $if[$get[p2f]==5||$get[p2f]==6]
+                             $let[p2t2;$toUppercase[$get[p2t2]]]
+                             $elseIf[$get[p2f]==7||$get[p2f]==8]
+                                 $let[p2t2;$toLowercase[$get[p2t2]]]
                              $endelseif
                          $endIf
                      $endelseif
                  $endIf
-                 $sendMessage[Your first premise is: $if[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p1t1] is $get[p1t2]$endelseif$elseif[$get[p1f]==3]some $get[p1t1] is [$get[p1t2]$endelseif$elseIf[$get[p1f==4]some $get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[[p1f]==5]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==6]$get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[p1f]==7]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==8]$get[p1t1] is not $get[p1t2]$endelseif$endIf]
-                 $let[bc;$awaitButton[Does your argument have a second premise?{button:Yes:GREEN::y}{button:No:RED::n};;20s;y;n]]
+                 $sendMessage[Your second premise is: $if[$get[p2f]==1]all $get[p2t1] is $get[p2t2]$elseIf[$get[p2f]==2]no $get[p2t1] is $get[p2t2]$endelseif$elseif[$get[p2f]==3]some $get[p2t1] is [$get[p2t2]$endelseif$elseIf[$get[p2f==4]some $get[p2t1] is not $get[p2t2]$endelseif$elseIf[$get[[p2f]==5]$get[p2t1] is $get[p2t2]$endelseif$elseIf[$get[p2f]==6]$get[p2t1] is not $get[p2t2]$endelseif$elseIf[$get[p2f]==7]$get[p2t1] is $get[p2t2]$endelseif$elseIf[$get[p2f]==8]$get[p2t1] is not $get[p2t2]$endelseif$endIf]
+                 $let[bc;$awaitButton[Does your argument have a third premise?{button:Yes:GREEN::y}{button:No:RED::n};;20s;y;n]]
                  $if[$get[bc]==n]
                      $let[cf;$awaitmenu[What is the form of your conclusion?
                      {title: Conclusion Form}
@@ -513,7 +513,7 @@ P2: $if[[$get[p2f]==1]all $get[p2t1] is $get[p2t2]$elseIf[$get[p2f]==2]no $get[p
                              $let[rc;1]
                          $endelseif
                      $endIf
-                     $if[$get[p1f]==2||$get[p1f]==4||$get[p1f]==6||$get[p1f]==8]
+                     $if[$get[p2f]==2||$get[p2f]==4||$get[p2f]==6||$get[p2f]==8]
                              $let[rc;$sum[$get[rc];1]]
                          $endelseif
                      $endIf
