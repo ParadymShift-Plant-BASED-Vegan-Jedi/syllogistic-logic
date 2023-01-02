@@ -350,9 +350,9 @@ P1: $if[[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p
                      $onlyIf[$get[$objectGet[$get[p1t2]]c]==1;Your argument is: invalid.]
                  $endelseif
              $endIf
-             $if[$get[c1f]==1||$get[p1f]==2||$get[p1f]==3||$get[p1f]==4]
+             $if[$get[cf]==1||$get[cf]==2||$get[cf]==3||$get[cf]==4]
                  $onlyIf[$get[$objectGet[$get[ct1]]c]==1&&$get[$objectGet[ct2]c]==1;Your argument is: invalid.]
-                 $elseIf[$get[p1f]==5||$get[p1f]==6]
+                 $elseIf[$get[cf]==5||$get[cf]==6]
                      $onlyIf[$get[$objectGet[$get[ct2]]c]==1;Your argument is: invalid.]
                  $endelseif
              $endIf
@@ -517,8 +517,47 @@ P2: $if[[$get[p2f]==1]all $get[p2t1] is $get[p2t2]$elseIf[$get[p2f]==2]no $get[p
                              $let[rc;$sum[$get[rc];1]]
                          $endelseif
                      $endIf
-                     
-                     
+                     $if[$get[cf]==1||$get[cf]==3||$get[cf]==5||$get[cf]==7]
+                         $let[rc;$sum[$get[rc];1]]
+                     $endIf
+                     $onlyIf[$get[rc]==1;Your argument is: invalid.]
+                     $if[$get[p1f]==1]
+                         $let[$objectGet[$get[p1t1]]c;1]
+                         $elseIf[$get[p1f]==2]
+                             $let[$objectGet[$get[p1t1]]c;1]
+                             $let[$objectGet[$get[p1t2]]c;1]
+                         $endelseif
+                         $elseIf[$get[p1f]==4||$get[p1f]==6]
+                             $let[$objectGet[$get[p1t2]]c;1]
+                         $endelseif
+                     $endIf
+                     $if[$get[p2f]==1]
+                         $onlyIf[$get[$objectGet[$get[p2t1]c]]==undefined;Your argument is: invalid.]
+                         $let[$objectGet[$get[p2t1]c];1]
+                         $elseIf[$get[p2f]==2]
+                             $onlyIf[$get[$objectGet[$get[p2t2]c]]==undefined;Your argument is: invalid.]
+                             $let[$objectGet[$get[p2t1]]c;1]
+                             $onlyIf[$get[$objectGet[$get[p2t2]c]]==undefined;Your argument is: invalid.]
+                             $let[$objectGet[$get[p2t2]]c;1]
+                         $endelseif
+                         $elseIf[$get[p2f]==4||$get[p2f]==6]
+                             $onlyIf[$get[$objectGet[$get[p2t2]c]]==undefined;Your argument is: invalid]
+                         $endelseif
+                     $endIf
+                     $if[$get[cf]==1||$get[cf]==5]
+                         $onlyIf[$get[$objectGet[$get[ct2]]c]==undefined;Your argument is: invalid.]
+                         $let[$objectGet[$get[ct2]]c;1]
+                         $elseIf[$get[cf==3]
+                             $onlyIf[$get[$objectGet[$get[ct1]]c]==undefined;Your argument is: invalid.]
+                             $let[$objectGet[$get[ct1]]c;1]
+                             $onlyIf[$get[$objectGet[$get[ct2]]c]==undefined;Your argument is: invalid.]
+                             $let[$objectGet[$get[ct2]]c;1]
+                         $endelseif
+                         $elseIf[$get[cf==4]
+                             $onlyIf[$get[$objectGet[$get[ct1]]c]==undefined;Your argument is: invalid.]
+                             $let[$objectGet[$get[ct1]c;1]
+                         $endelseif
+                     $endIf
                      
                      
                      
