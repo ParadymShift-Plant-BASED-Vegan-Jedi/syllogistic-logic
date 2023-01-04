@@ -1984,7 +1984,7 @@ P8: $if[[$get[p8f]==1]all $get[p8t1] is $get[p8t2]$elseIf[$get[p8f]==2]no $get[p
                                                                              $endelseif
                                                                          $endIf
                                                                          $sendMessage[Your ninth premise is: $if[$get[p9f]==1]all $get[p9t1] is $get[p9t2]$elseIf[$get[p9f]==2]no $get[p9t1] is $get[p9t2]$endelseif$elseif[$get[p9f]==3]some $get[p9t1] is [$get[p9t2]$endelseif$elseIf[$get[p9f==4]some $get[p9t1] is not $get[p9t2]$endelseif$elseIf[$get[[p9f]==5]$get[p9t1] is $get[p9t2]$endelseif$elseIf[$get[p9f]==6]$get[p9t1] is not $get[p9t2]$endelseif$elseIf[$get[p9f]==7]$get[p9t1] is $get[p9t2]$endelseif$elseIf[$get[p9f]==8]$get[p9t1] is not $get[p9t2]$endelseif$endIf]
-                                                                         $let[bc;$awaitButton[Does your argument have a ninth premise?{button:Yes:GREEN::y}{button:No:RED::n};;20s;y;n]]
+                                                                         $let[bc;$awaitButton[Does your argument have a tenth premise?{button:Yes:GREEN::y}{button:No:RED::n};;20s;y;n]]
                                                                          $if[$get[bc]==n]
                                                                              $let[cf;$awaitmenu[What is the form of your conclusion?
                                                                              {title: Conclusion Form}
@@ -2426,7 +2426,31 @@ P10: $if[[$get[p10f]==1]all $get[p10t1] is $get[p10t2]$elseIf[$get[p10f]==2]no $
                                                                                      $endIf
                                                                                      $sendMessage[Your argument is: valid.]
                                                                                      $elseIf[$get[bc]==y]
-                                                                                        $stop[Sorry, this command doesn't support more than 10 premises! Speak with <@383481247332302849> about modifying the code to accept more than 10 premises.]
+                                                                                         $stop[Sorry, this command doesn't support more than 10 premises! Speak with <@383481247332302849> about modifying the code to accept more than 10 premises.]
+                                                                                     $endelseif
+                                                                                 $endIf //no to 11th premise
+                                                                             $endelseif //yes to 10th premise
+                                                                         $endIf //no to 10th premise
+                                                                     $endelseif //yes to 9th premise
+                                                                 $endIf //no to 9th premise
+                                                             $endelseif
+                                                         $endIf //no to 8th premise
+                                                     $endelseif
+                                                 $endIf //no to 7th premise
+                                             $endelseif
+                                         $endIf //no to 6th premise
+                                     $endelseif
+                                 $endIf //no to 5th premise
+                             $endelseif
+                         $endIf //no to 4th premise
+                     $endelseif
+                 $endIf //no to 3rd premise
+             $endelseif
+         $endIf //no to 2nd premise
+     $endelseif
+ $endIf //no to first premise. 
+                                 
+                                                                             
                      
                      
                      
