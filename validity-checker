@@ -1,31 +1,35 @@
 $objectCreate[$includeLibrary[vco]]
+$function[m_form]{
+{placeholder=Select}
+{min=1}
+{max=1}
+{label=all A is B}
+{value=1}
+{label=no A is B}
+{value=2}
+{label=some A is B}
+{value=3}
+{label=some A is not B}
+{value=4}
+{label=x is A}
+{value=5}
+{label=x is not A}
+{value=6}
+{label=x is y}
+{value=7}
+{label=x is not y}
+{value=8}
+}
+}
+$function[cf_menu]{
+$let[cf;$awaitmenu[What is the form of your conclusion?
+{title: Conclusion Form}
+$m_form
+;;30s;cform]
+}
 $let[bc;$awaitButton[Does your argument have at least one premise?{button:Yes:GREEN::y}{button:No:RED::n};;30s;y;n]]
 $if[bc==n]
-    $let[cf;$awaitmenu[What is the form of your conclusion?
-    {title: Conclusion Form}
-    {menu:
-    {id=cform}
-    {placeholder=Select}
-    {min=1}
-    {max=1}
-    {label=all A is B}
-    {value=1}
-    {label=no A is B}
-    {value=2}
-    {label=some A is B}
-    {value=3}
-    {label=some A is not B}
-    {value=4}
-    {label=x is A}
-    {value=5}
-    {label=x is not A}
-    {value=6}
-    {label=x is y}
-    {value=7}
-    {label=x is not y}
-    {value=8}
-    }
-    ;;30s;p1]
+    $cf_menu
     $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
     $sendMessage[Your conclusion form is: $objectGet[$get[cf]]]
     $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
@@ -232,26 +236,7 @@ P1: $if[[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p
                  {title: Premise 2 Form}
                  {menu:
                  {id=p2form}
-                 {placeholder=Select}
-                 {min=1}
-                 {max=1}
-                 {label=all A is B}
-                 {value=1}
-                 {label=no A is B}
-                 {value=2}
-                 {label=some A is B}
-                 {value=3}
-                 {label=some A is not B}
-                 {value=4}
-                 {label=x is A}
-                 {value=5}
-                 {label=x is not A}
-                 {value=6}
-                 {label=x is y}
-                 {value=7}
-                 {label=x is not y}
-                 {value=8}
-                 }
+                 $m_form
                  ;;30s;p2form]
                  $onlyIf[$get[p1f]!=undefined;Error. Please make a selection next time!]
                  $sendMessage[Your premise 1 form is: $objectGet[$get[p1f]]]
@@ -277,31 +262,7 @@ P1: $if[[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p
                  $sendMessage[Your second premise is: $if[$get[p2f]==1]all $get[p2t1] is $get[p2t2]$elseIf[$get[p2f]==2]no $get[p2t1] is $get[p2t2]$endelseif$elseif[$get[p2f]==3]some $get[p2t1] is [$get[p2t2]$endelseif$elseIf[$get[p2f==4]some $get[p2t1] is not $get[p2t2]$endelseif$elseIf[$get[[p2f]==5]$get[p2t1] is $get[p2t2]$endelseif$elseIf[$get[p2f]==6]$get[p2t1] is not $get[p2t2]$endelseif$elseIf[$get[p2f]==7]$get[p2t1] is $get[p2t2]$endelseif$elseIf[$get[p2f]==8]$get[p2t1] is not $get[p2t2]$endelseif$endIf]
                  $let[bc;$awaitButton[Does your argument have a third premise?{button:Yes:GREEN::y}{button:No:RED::n};;20s;y;n]]
                  $if[$get[bc]==n]
-                     $let[cf;$awaitmenu[What is the form of your conclusion?
-                     {title: Conclusion Form}
-                     {menu:
-                     {id=cform}
-                     {placeholder=Select}
-                     {min=1}
-                     {max=1}
-                     {label=all A is B}
-                     {value=1}
-                     {label=no A is B}
-                     {value=2}
-                     {label=some A is B}
-                     {value=3}
-                     {label=some A is not B}
-                     {value=4}
-                     {label=x is A}
-                     {value=5}
-                     {label=x is not A}
-                     {value=6}
-                     {label=x is y}
-                     {value=7}
-                     {label=x is not y}
-                     {value=8}
-                     }
-                     ;;30s;cform]
+                     $cf_menu
                      $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
                      $sendMessage[Your conclusion form is: $objectGet[$get[cf]]]
                      $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
@@ -401,26 +362,7 @@ P2: $if[[$get[p2f]==1]all $get[p2t1] is $get[p2t2]$elseIf[$get[p2f]==2]no $get[p
                          {title: Premise 3 Form}
                          {menu:
                          {id=p3form}
-                         {placeholder=Select}
-                         {min=1}
-                         {max=1}
-                         {label=all A is B}
-                         {value=1}
-                         {label=no A is B}
-                         {value=2}
-                         {label=some A is B}
-                         {value=3}
-                         {label=some A is not B}
-                         {value=4}
-                         {label=x is A}
-                         {value=5}
-                         {label=x is not A}
-                         {value=6}
-                         {label=x is y}
-                         {value=7}
-                         {label=x is not y}
-                         {value=8}
-                         }
+                         $m_form
                          ;;30s;p3form]
                          $onlyIf[$get[p3f]!=undefined;Error. Please make a selection next time!]
                          $sendMessage[Your premise 3 form is: $objectGet[$get[p3f]]]
@@ -446,31 +388,7 @@ P2: $if[[$get[p2f]==1]all $get[p2t1] is $get[p2t2]$elseIf[$get[p2f]==2]no $get[p
                          $sendMessage[Your third premise is: $if[$get[p3f]==1]all $get[p3t1] is $get[p3t2]$elseIf[$get[p3f]==2]no $get[p3t1] is $get[p3t2]$endelseif$elseif[$get[p3f]==3]some $get[p3t1] is [$get[p3t2]$endelseif$elseIf[$get[p3f==4]some $get[p3t1] is not $get[p3t2]$endelseif$elseIf[$get[[p3f]==5]$get[p3t1] is $get[p3t2]$endelseif$elseIf[$get[p3f]==6]$get[p3t1] is not $get[p3t2]$endelseif$elseIf[$get[p3f]==7]$get[p3t1] is $get[p3t2]$endelseif$elseIf[$get[p3f]==8]$get[p3t1] is not $get[p3t2]$endelseif$endIf]
                          $let[bc;$awaitButton[Does your argument have a fourth premise?{button:Yes:GREEN::y}{button:No:RED::n};;20s;y;n]]
                          $if[$get[bc]==n]
-                             $let[cf;$awaitmenu[What is the form of your conclusion?
-                             {title: Conclusion Form}
-                             {menu:
-                             {id=cform}
-                             {placeholder=Select}
-                             {min=1}
-                             {max=1}
-                             {label=all A is B}
-                             {value=1}
-                             {label=no A is B}
-                             {value=2}
-                             {label=some A is B}
-                             {value=3}
-                             {label=some A is not B}
-                             {value=4}
-                             {label=x is A}
-                             {value=5}
-                             {label=x is not A}
-                             {value=6}
-                             {label=x is y}
-                             {value=7}
-                             {label=x is not y}
-                             {value=8}
-                             }
-                             ;;30s;cform]
+                             $cf_menu
                              $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
                              $sendMessage[Your conclusion form is: $objectGet[$get[cf]].]
                              $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
@@ -543,26 +461,7 @@ P3: $if[[$get[p3f]==1]all $get[p3t1] is $get[p3t2]$elseIf[$get[p3f]==2]no $get[p
                                  {title: Premise 4 Form}
                                  {menu:
                                  {id=p4form}
-                                 {placeholder=Select}
-                                 {min=1}
-                                 {max=1}
-                                 {label=all A is B}
-                                 {value=1}
-                                 {label=no A is B}
-                                 {value=2}
-                                 {label=some A is B}
-                                 {value=3}
-                                 {label=some A is not B}
-                                 {value=4}
-                                 {label=x is A}
-                                 {value=5}
-                                 {label=x is not A}
-                                 {value=6}
-                                 {label=x is y}
-                                 {value=7}
-                                 {label=x is not y}
-                                 {value=8}
-                                 }
+                                 $m_form
                                  ;;30s;p4form]
                                  $onlyIf[$get[p4f]!=undefined;Error. Please make a selection next time!]
                                  $sendMessage[Your premise 4 form is: $objectGet[$get[[p4f]].]
@@ -588,31 +487,7 @@ P3: $if[[$get[p3f]==1]all $get[p3t1] is $get[p3t2]$elseIf[$get[p3f]==2]no $get[p
                                  $sendMessage[Your fourth premise is: $if[$get[p4f]==1]all $get[p4t1] is $get[p4t2]$elseIf[$get[p4f]==2]no $get[p4t1] is $get[p4t2]$endelseif$elseif[$get[p4f]==3]some $get[p4t1] is [$get[p4t2]$endelseif$elseIf[$get[p4f==4]some $get[p4t1] is not $get[p4t2]$endelseif$elseIf[$get[[p4f]==5]$get[p4t1] is $get[p4t2]$endelseif$elseIf[$get[p4f]==6]$get[p4t1] is not $get[p4t2]$endelseif$elseIf[$get[p4f]==7]$get[p4t1] is $get[p4t2]$endelseif$elseIf[$get[p4f]==8]$get[p4t1] is not $get[p4t2]$endelseif$endIf]
                                  $let[bc;$awaitButton[Does your argument have a fifth premise?{button:Yes:GREEN::y}{button:No:RED::n};;20s;y;n]]
                                  $if[$get[bc]==n]
-                                     $let[cf;$awaitmenu[What is the form of your conclusion?
-                                     {title: Conclusion Form}
-                                     {menu:
-                                     {id=cform}
-                                     {placeholder=Select}
-                                     {min=1}
-                                     {max=1}
-                                     {label=all A is B}
-                                     {value=1}
-                                     {label=no A is B}
-                                     {value=2}
-                                     {label=some A is B}
-                                     {value=3}
-                                     {label=some A is not B}
-                                     {value=4}
-                                     {label=x is A}
-                                     {value=5}
-                                     {label=x is not A}
-                                     {value=6}
-                                     {label=x is y}
-                                     {value=7}
-                                     {label=x is not y}
-                                     {value=8}
-                                     }
-                                     ;;30s;cform]
+                                     $cf_menu
                                      $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
                                      $sendMessage[Your conclusion form is: $objectGet[$get[cf]].]
                                      $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
@@ -692,26 +567,7 @@ P4: $if[[$get[p4f]==1]all $get[p4t1] is $get[p4t2]$elseIf[$get[p4f]==2]no $get[p
                                          {title: Premise 5 Form}
                                          {menu:
                                          {id=p5form}
-                                         {placeholder=Select}
-                                         {min=1}
-                                         {max=1}
-                                         {label=all A is B}
-                                         {value=1}
-                                         {label=no A is B}
-                                         {value=2}
-                                         {label=some A is B}
-                                         {value=3}
-                                         {label=some A is not B}
-                                         {value=4}
-                                         {label=x is A}
-                                         {value=5}
-                                         {label=x is not A}
-                                         {value=6}
-                                         {label=x is y}
-                                         {value=7}
-                                         {label=x is not y}
-                                         {value=8}
-                                         }
+                                         $m_form
                                          ;;30s;p5form]
                                          $onlyIf[$get[p5f]!=undefined;Error. Please make a selection next time!]
                                          $sendMessage[Your premise 5 form is: $objectGet[$get[p5f]].]
@@ -737,31 +593,7 @@ P4: $if[[$get[p4f]==1]all $get[p4t1] is $get[p4t2]$elseIf[$get[p4f]==2]no $get[p
                                          $sendMessage[Your fifth premise is: $if[$get[p5f]==1]all $get[p5t1] is $get[p5t2]$elseIf[$get[p5f]==2]no $get[p5t1] is $get[p5t2]$endelseif$elseif[$get[p5f]==3]some $get[p5t1] is [$get[p5t2]$endelseif$elseIf[$get[p5f==4]some $get[p5t1] is not $get[p5t2]$endelseif$elseIf[$get[[p5f]==5]$get[p5t1] is $get[p5t2]$endelseif$elseIf[$get[p5f]==6]$get[p5t1] is not $get[p5t2]$endelseif$elseIf[$get[p5f]==7]$get[p5t1] is $get[p5t2]$endelseif$elseIf[$get[p5f]==8]$get[p5t1] is not $get[p5t2]$endelseif$endIf]
                                          $let[bc;$awaitButton[Does your argument have a sixth premise?{button:Yes:GREEN::y}{button:No:RED::n};;20s;y;n]]
                                          $if[$get[bc]==n]
-                                             $let[cf;$awaitmenu[What is the form of your conclusion?
-                                             {title: Conclusion Form}
-                                             {menu:
-                                             {id=cform}
-                                             {placeholder=Select}
-                                             {min=1}
-                                             {max=1}
-                                             {label=all A is B}
-                                             {value=1}
-                                             {label=no A is B}
-                                             {value=2}
-                                             {label=some A is B}
-                                             {value=3}
-                                             {label=some A is not B}
-                                             {value=4}
-                                             {label=x is A}
-                                             {value=5}
-                                             {label=x is not A}
-                                             {value=6}
-                                             {label=x is y}
-                                             {value=7}
-                                             {label=x is not y}
-                                             {value=8}
-                                             }
-                                             ;;30s;cform]
+                                             $cf_menu
                                              $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
                                              $sendMessage[Your conclusion form is: $objectGet[$get[cf]].]
                                              $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
@@ -854,26 +686,7 @@ P5: $if[[$get[p5f]==1]all $get[p5t1] is $get[p5t2]$elseIf[$get[p5f]==2]no $get[p
                                                  {title: Premise 6 Form}
                                                  {menu:
                                                  {id=p6form}
-                                                 {placeholder=Select}
-                                                 {min=1}
-                                                 {max=1}
-                                                 {label=all A is B}
-                                                 {value=1}
-                                                 {label=no A is B}
-                                                 {value=2}
-                                                 {label=some A is B}
-                                                 {value=3}
-                                                 {label=some A is not B}
-                                                 {value=4}
-                                                 {label=x is A}
-                                                 {value=5}
-                                                 {label=x is not A}
-                                                 {value=6}
-                                                 {label=x is y}
-                                                 {value=7}
-                                                 {label=x is not y}
-                                                 {value=8}
-                                                 }
+                                                 $m_form
                                                  ;;30s;p6form]
                                                  $onlyIf[$get[p6f]!=undefined;Error. Please make a selection next time!]
                                                  $sendMessage[Your conclusion form is: $objectGet[$get[p6f]].]
@@ -899,31 +712,7 @@ P5: $if[[$get[p5f]==1]all $get[p5t1] is $get[p5t2]$elseIf[$get[p5f]==2]no $get[p
                                                  $sendMessage[Your sixth premise is: $if[$get[p6f]==1]all $get[p6t1] is $get[p6t2]$elseIf[$get[p6f]==2]no $get[p6t1] is $get[p6t2]$endelseif$elseif[$get[p6f]==3]some $get[p6t1] is [$get[p6t2]$endelseif$elseIf[$get[p6f==4]some $get[p6t1] is not $get[p6t2]$endelseif$elseIf[$get[[p6f]==5]$get[p6t1] is $get[p6t2]$endelseif$elseIf[$get[p6f]==6]$get[p6t1] is not $get[p6t2]$endelseif$elseIf[$get[p6f]==7]$get[p6t1] is $get[p6t2]$endelseif$elseIf[$get[p6f]==8]$get[p6t1] is not $get[p6t2]$endelseif$endIf]
                                                  $let[bc;$awaitButton[Does your argument have a seventh premise?{button:Yes:GREEN::y}{button:No:RED::n};;20s;y;n]]
                                                  $if[$get[bc]==n]
-                                                     $let[cf;$awaitmenu[What is the form of your conclusion?
-                                                     {title: Conclusion Form}
-                                                     {menu:
-                                                     {id=cform}
-                                                     {placeholder=Select}
-                                                     {min=1}
-                                                     {max=1}
-                                                     {label=all A is B}
-                                                     {value=1}
-                                                     {label=no A is B}
-                                                     {value=2}
-                                                     {label=some A is B}
-                                                     {value=3}
-                                                     {label=some A is not B}
-                                                     {value=4}
-                                                     {label=x is A}
-                                                     {value=5}
-                                                     {label=x is not A}
-                                                     {value=6}
-                                                     {label=x is y}
-                                                     {value=7}
-                                                     {label=x is not y}
-                                                     {value=8}
-                                                     }
-                                                     ;;30s;cform]
+                                                     $cf_menu
                                                      $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
                                                      $sendMessage[Your conclusion form is: $objectGet[$get[cf]].]
                                                      $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
@@ -1026,26 +815,7 @@ P6: $if[[$get[p6f]==1]all $get[p6t1] is $get[p6t2]$elseIf[$get[p6f]==2]no $get[p
                                                          {title: Premise 7 Form}
                                                          {menu:
                                                          {id=p7form}
-                                                         {placeholder=Select}
-                                                         {min=1}
-                                                         {max=1}
-                                                         {label=all A is B}
-                                                         {value=1}
-                                                         {label=no A is B}
-                                                         {value=2}
-                                                         {label=some A is B}
-                                                         {value=3}
-                                                         {label=some A is not B}
-                                                         {value=4}
-                                                         {label=x is A}
-                                                         {value=5}
-                                                         {label=x is not A}
-                                                         {value=6}
-                                                         {label=x is y}
-                                                         {value=7}
-                                                         {label=x is not y}
-                                                         {value=8}
-                                                         }
+                                                         $m_form
                                                          ;;30s;p7form]
                                                          $onlyIf[$get[p7f]!=undefined;Error. Please make a selection next time!]
                                                          $sendMessage[Your conclusion form is: $objectGet[$get[p7f]].]
@@ -1071,31 +841,7 @@ P6: $if[[$get[p6f]==1]all $get[p6t1] is $get[p6t2]$elseIf[$get[p6f]==2]no $get[p
                                                          $sendMessage[Your seventh premise is: $if[$get[p7f]==1]all $get[p7t1] is $get[p7t2]$elseIf[$get[p7f]==2]no $get[p7t1] is $get[p7t2]$endelseif$elseif[$get[p7f]==3]some $get[p7t1] is [$get[p7t2]$endelseif$elseIf[$get[p7f==4]some $get[p7t1] is not $get[p7t2]$endelseif$elseIf[$get[[p7f]==5]$get[p7t1] is $get[p7t2]$endelseif$elseIf[$get[p7f]==6]$get[p7t1] is not $get[p7t2]$endelseif$elseIf[$get[p7f]==7]$get[p7t1] is $get[p7t2]$endelseif$elseIf[$get[p7f]==8]$get[p7t1] is not $get[p7t2]$endelseif$endIf]
                                                          $let[bc;$awaitButton[Does your argument have an eighth premise?{button:Yes:GREEN::y}{button:No:RED::n};;20s;y;n]]
                                                          $if[$get[bc]==n]
-                                                             $let[cf;$awaitmenu[What is the form of your conclusion?
-                                                             {title: Conclusion Form}
-                                                             {menu:
-                                                             {id=cform}
-                                                             {placeholder=Select}
-                                                             {min=1}
-                                                             {max=1}
-                                                             {label=all A is B}
-                                                             {value=1}
-                                                             {label=no A is B}
-                                                             {value=2}
-                                                             {label=some A is B}
-                                                             {value=3}
-                                                             {label=some A is not B}
-                                                             {value=4}
-                                                             {label=x is A}
-                                                             {value=5}
-                                                             {label=x is not A}
-                                                             {value=6}
-                                                             {label=x is y}
-                                                             {value=7}
-                                                             {label=x is not y}
-                                                             {value=8}
-                                                             }
-                                                             ;;30s;cform]
+                                                             $cf_menu
                                                              $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
                                                              $sendMessage[Your conclusion form is: $objectGet[$get[cf]].]
                                                              $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
@@ -1208,26 +954,7 @@ P7: $if[[$get[p7f]==1]all $get[p7t1] is $get[p7t2]$elseIf[$get[p7f]==2]no $get[p
                                                                  {title: Premise 8 Form}
                                                                  {menu:
                                                                  {id=p8form}
-                                                                 {placeholder=Select}
-                                                                 {min=1}
-                                                                 {max=1}
-                                                                 {label=all A is B}
-                                                                 {value=1}
-                                                                 {label=no A is B}
-                                                                 {value=2}
-                                                                 {label=some A is B}
-                                                                 {value=3}
-                                                                 {label=some A is not B}
-                                                                 {value=4}
-                                                                 {label=x is A}
-                                                                 {value=5}
-                                                                 {label=x is not A}
-                                                                 {value=6}
-                                                                 {label=x is y}
-                                                                 {value=7}
-                                                                 {label=x is not y}
-                                                                 {value=8}
-                                                                 }
+                                                                 $m_form
                                                                  ;;30s;p8form]
                                                                  $onlyIf[$get[p8f]!=undefined;Error. Please make a selection next time!]
                                                                  $sendMessage[Your premise 8 form is: $objectGet[$get[p8f]].]
@@ -1253,31 +980,7 @@ P7: $if[[$get[p7f]==1]all $get[p7t1] is $get[p7t2]$elseIf[$get[p7f]==2]no $get[p
                                                                  $sendMessage[Your eighth premise is: $if[$get[p8f]==1]all $get[p8t1] is $get[p8t2]$elseIf[$get[p8f]==2]no $get[p8t1] is $get[p8t2]$endelseif$elseif[$get[p8f]==3]some $get[p8t1] is [$get[p8t2]$endelseif$elseIf[$get[p8f==4]some $get[p8t1] is not $get[p8t2]$endelseif$elseIf[$get[[p8f]==5]$get[p8t1] is $get[p8t2]$endelseif$elseIf[$get[p8f]==6]$get[p8t1] is not $get[p8t2]$endelseif$elseIf[$get[p8f]==7]$get[p8t1] is $get[p8t2]$endelseif$elseIf[$get[p8f]==8]$get[p8t1] is not $get[p8t2]$endelseif$endIf]
                                                                  $let[bc;$awaitButton[Does your argument have a ninth premise?{button:Yes:GREEN::y}{button:No:RED::n};;20s;y;n]]
                                                                  $if[$get[bc]==n]
-                                                                     $let[cf;$awaitmenu[What is the form of your conclusion?
-                                                                     {title: Conclusion Form}
-                                                                     {menu:
-                                                                     {id=cform}
-                                                                     {placeholder=Select}
-                                                                     {min=1}
-                                                                     {max=1}
-                                                                     {label=all A is B}
-                                                                     {value=1}
-                                                                     {label=no A is B}
-                                                                     {value=2}
-                                                                     {label=some A is B}
-                                                                     {value=3}
-                                                                     {label=some A is not B}
-                                                                     {value=4}
-                                                                     {label=x is A}
-                                                                     {value=5}
-                                                                     {label=x is not A}
-                                                                     {value=6}
-                                                                     {label=x is y}
-                                                                     {value=7}
-                                                                     {label=x is not y}
-                                                                     {value=8}
-                                                                     }
-                                                                     ;;30s;cform]
+                                                                     $cf_menu
                                                                      $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
                                                                      $sendMessage[Your conclusion form is: $objectGet[$get[cf]].]
                                                                      $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
@@ -1400,26 +1103,7 @@ P8: $if[[$get[p8f]==1]all $get[p8t1] is $get[p8t2]$elseIf[$get[p8f]==2]no $get[p
                                                                          {title: Premise 9 Form}
                                                                          {menu:
                                                                          {id=p9form}
-                                                                         {placeholder=Select}
-                                                                         {min=1}
-                                                                         {max=1}
-                                                                         {label=all A is B}
-                                                                         {value=1}
-                                                                         {label=no A is B}
-                                                                         {value=2}
-                                                                         {label=some A is B}
-                                                                         {value=3}
-                                                                         {label=some A is not B}
-                                                                         {value=4}
-                                                                         {label=x is A}
-                                                                         {value=5}
-                                                                         {label=x is not A}
-                                                                         {value=6}
-                                                                         {label=x is y}
-                                                                         {value=7}
-                                                                         {label=x is not y}
-                                                                         {value=8}
-                                                                         }
+                                                                         $m_form
                                                                          ;;30s;p9form]
                                                                          $onlyIf[$get[p9f]!=undefined;Error. Please make a selection next time!]
                                                                          $sendMessage[Your premise 9 form is: $objectGet[$get[p9f]].]
@@ -1445,31 +1129,7 @@ P8: $if[[$get[p8f]==1]all $get[p8t1] is $get[p8t2]$elseIf[$get[p8f]==2]no $get[p
                                                                          $sendMessage[Your ninth premise is: $if[$get[p9f]==1]all $get[p9t1] is $get[p9t2]$elseIf[$get[p9f]==2]no $get[p9t1] is $get[p9t2]$endelseif$elseif[$get[p9f]==3]some $get[p9t1] is [$get[p9t2]$endelseif$elseIf[$get[p9f==4]some $get[p9t1] is not $get[p9t2]$endelseif$elseIf[$get[[p9f]==5]$get[p9t1] is $get[p9t2]$endelseif$elseIf[$get[p9f]==6]$get[p9t1] is not $get[p9t2]$endelseif$elseIf[$get[p9f]==7]$get[p9t1] is $get[p9t2]$endelseif$elseIf[$get[p9f]==8]$get[p9t1] is not $get[p9t2]$endelseif$endIf]
                                                                          $let[bc;$awaitButton[Does your argument have a tenth premise?{button:Yes:GREEN::y}{button:No:RED::n};;20s;y;n]]
                                                                          $if[$get[bc]==n]
-                                                                             $let[cf;$awaitmenu[What is the form of your conclusion?
-                                                                             {title: Conclusion Form}
-                                                                             {menu:
-                                                                             {id=cform}
-                                                                             {placeholder=Select}
-                                                                             {min=1}
-                                                                             {max=1}
-                                                                             {label=all A is B}
-                                                                             {value=1}
-                                                                             {label=no A is B}
-                                                                             {value=2}
-                                                                             {label=some A is B}
-                                                                             {value=3}
-                                                                             {label=some A is not B}
-                                                                             {value=4}
-                                                                             {label=x is A}
-                                                                             {value=5}
-                                                                             {label=x is not A}
-                                                                             {value=6}
-                                                                             {label=x is y}
-                                                                             {value=7}
-                                                                             {label=x is not y}
-                                                                             {value=8}
-                                                                             }
-                                                                             ;;30s;cform]
+                                                                             $cf_menu
                                                                              $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
                                                                              $sendMessage[Your conclusion form is: $objectGet[$get[cf]].]
                                                                              $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
@@ -1535,7 +1195,7 @@ P9: $if[[$get[p9f]==1]all $get[p9t1] is $get[p9t2]$elseIf[$get[p9f]==2]no $get[p
                                                                              $if[$get[cf]==1||$get[cf]==3||$get[cf]==5||$get[cf]==7]
                                                                                  $let[rc;$sum[$get[rc];1]]
                                                                              $endIf
-                                                                             $onlyIf[$get[rc]==1;Your argument is: invalid.] LAST BIG PASTE HERE OH MY GOD ITS SO CLOSE!!
+                                                                             $onlyIf[$get[rc]==1;Your argument is: invalid.]
                                                                              $if[$get[p1f]==1||$get[p1f]==2||$get[p1f]==3||$get[p1f]==4]
                                                                                  $onlyIf[$get[$objectGet[$get[p1t1]]c]==1&&$get[$objectGet[p1t2]c]==1;Your argument is: invalid.]
                                                                                  $elseIf[$get[p1f]==5||$get[p1f]==6]
@@ -1602,26 +1262,7 @@ P9: $if[[$get[p9f]==1]all $get[p9t1] is $get[p9t2]$elseIf[$get[p9f]==2]no $get[p
                                                                                  {title: Premise 10 Form}
                                                                                  {menu:
                                                                                  {id=p10form}
-                                                                                 {placeholder=Select}
-                                                                                 {min=1}
-                                                                                 {max=1}
-                                                                                 {label=all A is B}
-                                                                                 {value=1}
-                                                                                 {label=no A is B}
-                                                                                 {value=2}
-                                                                                 {label=some A is B}
-                                                                                 {value=3}
-                                                                                 {label=some A is not B}
-                                                                                 {value=4}
-                                                                                 {label=x is A}
-                                                                                 {value=5}
-                                                                                 {label=x is not A}
-                                                                                 {value=6}
-                                                                                 {label=x is y}
-                                                                                 {value=7}
-                                                                                 {label=x is not y}
-                                                                                 {value=8}
-                                                                                 }
+                                                                                 $m_form
                                                                                  ;;30s;p10form]
                                                                                  $onlyIf[$get[p10f]!=undefined;Error. Please make a selection next time!]
                                                                                  $sendMessage[Your premise 10 form is: $objectGet[$get[p10f]].]
@@ -1647,31 +1288,7 @@ P9: $if[[$get[p9f]==1]all $get[p9t1] is $get[p9t2]$elseIf[$get[p9f]==2]no $get[p
                                                                                  $sendMessage[Your tenth premise is: $if[$get[p10f]==1]all $get[p10t1] is $get[p10t2]$elseIf[$get[p10f]==2]no $get[p10t1] is $get[p10t2]$endelseif$elseif[$get[p10f]==3]some $get[p10t1] is [$get[p10t2]$endelseif$elseIf[$get[p10f==4]some $get[p10t1] is not $get[p10t2]$endelseif$elseIf[$get[[p10f]==5]$get[p10t1] is $get[p10t2]$endelseif$elseIf[$get[p10f]==6]$get[p10t1] is not $get[p10t2]$endelseif$elseIf[$get[p10f]==7]$get[p10t1] is $get[p10t2]$endelseif$elseIf[$get[p10f]==8]$get[p10t1] is not $get[p10t2]$endelseif$endIf]
                                                                                  $let[bc;$awaitButton[Does your argument have an eleventh premise?{button:Yes:GREEN::y}{button:No:RED::n};;20s;y;n]]
                                                                                  $if[$get[bc]==n]
-                                                                                     $let[cf;$awaitmenu[What is the form of your conclusion?
-                                                                                     {title: Conclusion Form}
-                                                                                     {menu:
-                                                                                     {id=cform}
-                                                                                     {placeholder=Select}
-                                                                                     {min=1}
-                                                                                     {max=1}
-                                                                                     {label=all A is B}
-                                                                                     {value=1}
-                                                                                     {label=no A is B}
-                                                                                     {value=2}
-                                                                                     {label=some A is B}
-                                                                                     {value=3}
-                                                                                     {label=some A is not B}
-                                                                                     {value=4}
-                                                                                     {label=x is A}
-                                                                                     {value=5}
-                                                                                     {label=x is not A}
-                                                                                     {value=6}
-                                                                                     {label=x is y}
-                                                                                     {value=7}
-                                                                                     {label=x is not y}
-                                                                                     {value=8}
-                                                                                     }
-                                                                                     ;;30s;cform]
+                                                                                     $cf_menu
                                                                                      $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
                                                                                      $sendMessage[Your conclusion form is: $objectGet[$get[cf]].]
                                                                                      $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
