@@ -25,7 +25,7 @@ $function[cf_menu]{
 $let[cf;$awaitmenu[What is the form of your conclusion?
 {title: Conclusion Form}
 $m_form
-;;30s;cform]
+;;30s;cform]]
 }
 $let[bc;$awaitButton[Does your argument have at least one premise?{button:Yes:GREEN::y}{button:No:RED::n};;30s;y;n]]
 $if[bc==n]
@@ -90,26 +90,7 @@ $if[bc==n]
         {title: Premise 1 Form}
         {menu:
         {id=p1form}
-        {placeholder=Select}
-        {min=1}
-        {max=1}
-        {label=all A is B}
-        {value=1}
-        {label=no A is B}
-        {value=2}
-        {label=some A is B}
-        {value=3}
-        {label=some A is not B}
-        {value=4}
-        {label=x is A}
-        {value=5}
-        {label=x is not A}
-        {value=6}
-        {label=x is y}
-        {value=7}
-        {label=x is not y}
-        {value=8}
-        }
+        $m_form
         ;;30s;p1form]
         $onlyIf[$get[p1f]!=undefined;Error. Please make a selection next time!]
         $sendMessage[Your premise 1 form is: $objectGet[$get[p1f]]]
@@ -135,31 +116,7 @@ $if[bc==n]
         $sendMessage[Your first premise is: $if[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p1t1] is $get[p1t2]$endelseif$elseif[$get[p1f]==3]some $get[p1t1] is [$get[p1t2]$endelseif$elseIf[$get[p1f==4]some $get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[[p1f]==5]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==6]$get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[p1f]==7]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==8]$get[p1t1] is not $get[p1t2]$endelseif$endIf]
         $let[bc;$awaitButton[Does your argument have a second premise?{button:Yes:GREEN::y}{button:No:RED::n};;20s;y;n]]
         $if[$get[bc]==n]
-            $let[cf;$awaitmenu[What is the form of your conclusion?
-            {title: Conclusion Form}
-            {menu:
-            {id=cform}
-            {placeholder=Select}
-            {min=1}
-            {max=1}
-            {label=all A is B}
-            {value=1}
-            {label=no A is B}
-            {value=2}
-            {label=some A is B}
-            {value=3}
-            {label=some A is not B}
-            {value=4}
-            {label=x is A}
-            {value=5}
-            {label=x is not A}
-            {value=6}
-            {label=x is y}
-            {value=7}
-            {label=x is not y}
-            {value=8}
-            }
-            ;;30s;cform]
+            $cf_menu
             $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
             $sendMessage[Your conclusion form is: $objectGet[$get[cf]]]
             $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
@@ -682,6 +639,21 @@ P5: $if[[$get[p5f]==1]all $get[p5t1] is $get[p5t2]$elseIf[$get[p5f]==2]no $get[p
                                              $endIf
                                              $sendMessage[Your argument is: valid.]
                                              $elseIf[$get[bc]==y]
+                                                 $sendMessage[Sorry, this bot doesn't support more than 5 premises in an argument!]
+                                             $endelseIf
+                                         $endIf //no to 6th premise
+                                     $endelseif
+                                 $endIf //no to 5th premise
+                             $endelseif
+                         $endIf //no to 4th premise
+                     $endelseif
+                 $endIf //no to 3rd premise
+             $endelseif
+         $endIf //no to 2nd premise
+     $endelseif
+ $endIf //no to first premise. 
+                                         
+                                                 /*
                                                  $let[p6f;$awaitMenu[Let's create your sixth premise. What is the form of premise 6?
                                                  {title: Premise 6 Form}
                                                  {menu:
@@ -1444,9 +1416,4 @@ P10: $if[[$get[p10f]==1]all $get[p10t1] is $get[p10t2]$elseIf[$get[p10f]==2]no $
          $endIf //no to 2nd premise
      $endelseif
  $endIf //no to first premise. 
-                                 
-                                                                             
-                     
-                     
-                     
-                     
+ */
