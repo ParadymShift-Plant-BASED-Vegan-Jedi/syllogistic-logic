@@ -1,67 +1,4 @@
-$objectCreate[
-{
-"A":"1",
-"B":"2",
-"C":"3",
-"D":"4",
-"E":"5",
-"F":"6",
-"G":"7",
-"H":"8",
-"I":"9",
-"J":"10",
-"K":"11",
-"L":"12",
-"M":"13",
-"N":"14",
-"O":"15",
-"P":"16",
-"Q":"17",
-"R":"18",
-"S":"19",
-"T":"20",
-"U":"21",
-"V":"22",
-"W":"23",
-"X":"24",
-"Y":"25",
-"Z":"26",
-"a":"1s",
-"b":"2s",
-"c":"3s",
-"d":"4s",
-"e":"5s",
-"f":"6s",
-"g":"7s",
-"h":"8s",
-"i":"9s",
-"j":"10s",
-"k":"11s",
-"l":"12s",
-"m":"13s",
-"n":"14s",
-"o":"15s",
-"p":"16s",
-"q":"17s",
-"r":"18s",
-"s":"19s",
-"t":"20s",
-"u":"21s",
-"v":"22s",
-"w":"23s",
-"x":"24s",
-"y":"25s",
-"z":"26s",
-"1":"all A is B.",
-"2":"no A is B.",
-"3":"some A is B.",
-"4":"some A is not B.",
-"5":"x is A.",
-"6":"x is not A.",
-"7":"x is y.",
-"8":"x is not y."
-}
-]
+$objectCreate[$includeLibrary[vco]]
 $let[bc;$awaitButton[Does your argument have at least one premise?{button:Yes:GREEN::y}{button:No:RED::n};;30s;y;n]]
 $if[bc==n]
     $let[cf;$awaitmenu[What is the form of your conclusion?
@@ -317,7 +254,7 @@ P1: $if[[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p
                  }
                  ;;30s;p2form]
                  $onlyIf[$get[p1f]!=undefined;Error. Please make a selection next time!]
-                 $sendMessage[Your conclusion form is: $objectGet[$get[p1f]]]
+                 $sendMessage[Your premise 1 form is: $objectGet[$get[p1f]]]
                  $let[p2t1;$awaitMessage[What letter represents the first term of your second premise? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
                  $onlyIf[$charCount[$get[p2t1]]==1;Error. Please only include a single letter next time.]
                  $onlyIf[$isNumber[$get[p2t1]]==false;Error. Please only include a single letter next time!]
@@ -486,7 +423,7 @@ P2: $if[[$get[p2f]==1]all $get[p2t1] is $get[p2t2]$elseIf[$get[p2f]==2]no $get[p
                          }
                          ;;30s;p3form]
                          $onlyIf[$get[p3f]!=undefined;Error. Please make a selection next time!]
-                         $sendMessage[Your conclusion form is: $objectGet[$get[p3f]]]
+                         $sendMessage[Your premise 3 form is: $objectGet[$get[p3f]]]
                          $let[p3t1;$awaitMessage[What letter represents the first term of your third premise? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
                          $onlyIf[$charCount[$get[p3t1]]==1;Error. Please only include a single letter next time.]
                          $onlyIf[$isNumber[$get[p3t1]]==false;Error. Please only include a single letter next time!]
@@ -534,35 +471,8 @@ P2: $if[[$get[p2f]==1]all $get[p2t1] is $get[p2t2]$elseIf[$get[p2f]==2]no $get[p
                              {value=8}
                              }
                              ;;30s;cform]
-                             $if[$get[cf]==1]
-                                 $sendMessage[Your conclusion form is: all A is B.]
-                                 $elseIf[$get[cf]==2]
-                                     $sendMessage[Your conclusion form is: no A is B.]
-                                 $endelseIf
-                                 $elseIf[$get[cf]==3]
-                                     $sendMessage[Your conclusion form is: some A is B.]
-                                 $endelseIf
-                                 $elseIf[$get[cf]==4]
-                                     $sendMessage[Your conclusion form is: some A is not B.]
-                                 $endelseIf
-                                 $elseIf[$get[cf]==5]
-                                     $sendMessage[Your conclusion form is: x is A.]
-                                 $endelseIf
-                                 $elseIf[$get[cf]==6]
-                                     $sendMessage[Your conclusion form is: x is not A.]
-                                 $endelseIf
-                                 $elseIf[$get[cf]==7]
-                                     $sendMessage[Your conclusion form is: x is y.]
-                                 $endelseIf
-                                 $elseIf[$get[cf]==8]
-                                     $sendMessage[Your conclusion form is: x is not y.]
-                                 $endelseIf
-                                 $elseIf[$get[cf]==undefined]
-                                     $stop[Error. Please make a selection next time!]
-                                 $endelseIf
-                                 $else
-                                 $stop[Unknown error. Please review code.]
-                             $endIf
+                             $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
+                             $sendMessage[Your conclusion form is: $objectGet[$get[cf]].]
                              $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
                              $onlyIf[$charCount[$get[ct1]]==1;Error. Please only include a single letter next time.]
                              $onlyIf[$isNumber[$get[ct1]]==false;Error. Please only include a single letter next time!]
@@ -654,35 +564,8 @@ P3: $if[[$get[p3f]==1]all $get[p3t1] is $get[p3t2]$elseIf[$get[p3f]==2]no $get[p
                                  {value=8}
                                  }
                                  ;;30s;p4form]
-                                 $if[$get[p4f]==1]
-                                     $sendMessage[Your premise 4 form is: all A is B.]
-                                     $elseIf[$get[p4f]==2]
-                                         $sendMessage[Your premise 4 form is: no A is B.]
-                                     $endelseIf
-                                     $elseIf[$get[[p4f]==3]
-                                         $sendMessage[Your premise 4 form is: some A is B.]
-                                     $endelseIf
-                                     $elseIf[$get[p4f]==4]
-                                         $sendMessage[Your premise 4 form is: some A is not B.]
-                                     $endelseIf
-                                     $elseIf[$get[p4f]==5]
-                                         $sendMessage[Your premise 4 form is: x is A.]
-                                     $endelseIf
-                                     $elseIf[$get[p4f]==6]
-                                         $sendMessage[Your premise 4 form is: x is not A.]
-                                     $endelseIf
-                                     $elseIf[$get[p4f]==7]
-                                         $sendMessage[Your premise 4 form is: x is y.]
-                                     $endelseIf
-                                     $elseIf[$get[p4f]==8]
-                                         $sendMessage[Your premise 4 form is: x is not y.]
-                                     $endelseIf
-                                     $elseIf[$get[p4f]==undefined]
-                                         $stop[Error. Please make a selection next time!]
-                                     $endelseIf
-                                     $else
-                                     $stop[Unknown error. Please review code.]
-                                 $endIf
+                                 $onlyIf[$get[p4f]!=undefined;Error. Please make a selection next time!]
+                                 $sendMessage[Your premise 4 form is: $objectGet[$get[[p4f]].]
                                  $let[p4t1;$awaitMessage[What letter represents the first term of your fourth premise? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
                                  $onlyIf[$charCount[$get[p4t1]]==1;Error. Please only include a single letter next time.]
                                  $onlyIf[$isNumber[$get[p4t1]]==false;Error. Please only include a single letter next time!]
@@ -730,35 +613,8 @@ P3: $if[[$get[p3f]==1]all $get[p3t1] is $get[p3t2]$elseIf[$get[p3f]==2]no $get[p
                                      {value=8}
                                      }
                                      ;;30s;cform]
-                                     $if[$get[cf]==1]
-                                         $sendMessage[Your conclusion form is: all A is B.]
-                                         $elseIf[$get[cf]==2]
-                                             $sendMessage[Your conclusion form is: no A is B.]
-                                         $endelseIf
-                                         $elseIf[$get[cf]==3]
-                                             $sendMessage[Your conclusion form is: some A is B.]
-                                         $endelseIf
-                                         $elseIf[$get[cf]==4]
-                                             $sendMessage[Your conclusion form is: some A is not B.]
-                                         $endelseIf
-                                         $elseIf[$get[cf]==5]
-                                             $sendMessage[Your conclusion form is: x is A.]
-                                         $endelseIf
-                                         $elseIf[$get[cf]==6]
-                                             $sendMessage[Your conclusion form is: x is not A.]
-                                         $endelseIf
-                                         $elseIf[$get[cf]==7]
-                                             $sendMessage[Your conclusion form is: x is y.]
-                                         $endelseIf
-                                         $elseIf[$get[cf]==8]
-                                             $sendMessage[Your conclusion form is: x is not y.]
-                                         $endelseIf
-                                         $elseIf[$get[cf]==undefined]
-                                             $stop[Error. Please make a selection next time!]
-                                         $endelseIf
-                                         $else
-                                         $stop[Unknown error. Please review code.]
-                                     $endIf
+                                     $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
+                                     $sendMessage[Your conclusion form is: $objectGet[$get[cf]].]
                                      $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
                                      $onlyIf[$charCount[$get[ct1]]==1;Error. Please only include a single letter next time.]
                                      $onlyIf[$isNumber[$get[ct1]]==false;Error. Please only include a single letter next time!]
@@ -857,35 +713,8 @@ P4: $if[[$get[p4f]==1]all $get[p4t1] is $get[p4t2]$elseIf[$get[p4f]==2]no $get[p
                                          {value=8}
                                          }
                                          ;;30s;p5form]
-                                         $if[$get[p5f]==1]
-                                             $sendMessage[Your premise 5 form is: all A is B.]
-                                             $elseIf[$get[p5f]==2]
-                                                 $sendMessage[Your premise 5 form is: no A is B.]
-                                             $endelseIf
-                                             $elseIf[$get[[p5f]==3]
-                                                 $sendMessage[Your premise 5 form is: some A is B.]
-                                             $endelseIf
-                                             $elseIf[$get[p5f]==4]
-                                                 $sendMessage[Your premise 5 form is: some A is not B.]
-                                             $endelseIf
-                                             $elseIf[$get[p5f]==5]
-                                                 $sendMessage[Your premise 5 form is: x is A.]
-                                             $endelseIf
-                                             $elseIf[$get[p5f]==6]
-                                                 $sendMessage[Your premise 5 form is: x is not A.]
-                                             $endelseIf
-                                             $elseIf[$get[p5f]==7]
-                                                 $sendMessage[Your premise 5 form is: x is y.]
-                                             $endelseIf
-                                             $elseIf[$get[p5f]==8]
-                                                 $sendMessage[Your premise 5 form is: x is not y.]
-                                             $endelseIf
-                                             $elseIf[$get[p5f]==undefined]
-                                                 $stop[Error. Please make a selection next time!]
-                                             $endelseIf
-                                             $else
-                                             $stop[Unknown error. Please review code.]
-                                         $endIf
+                                         $onlyIf[$get[p5f]!=undefined;Error. Please make a selection next time!]
+                                         $sendMessage[Your premise 5 form is: $objectGet[$get[p5f]].]
                                          $let[p5t1;$awaitMessage[What letter represents the first term of your fifth premise? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
                                          $onlyIf[$charCount[$get[p5t1]]==1;Error. Please only include a single letter next time.]
                                          $onlyIf[$isNumber[$get[p5t1]]==false;Error. Please only include a single letter next time!]
@@ -933,35 +762,8 @@ P4: $if[[$get[p4f]==1]all $get[p4t1] is $get[p4t2]$elseIf[$get[p4f]==2]no $get[p
                                              {value=8}
                                              }
                                              ;;30s;cform]
-                                             $if[$get[cf]==1]
-                                                 $sendMessage[Your conclusion form is: all A is B.]
-                                                 $elseIf[$get[cf]==2]
-                                                     $sendMessage[Your conclusion form is: no A is B.]
-                                                 $endelseIf
-                                                 $elseIf[$get[cf]==3]
-                                                     $sendMessage[Your conclusion form is: some A is B.]
-                                                 $endelseIf
-                                                 $elseIf[$get[cf]==4]
-                                                     $sendMessage[Your conclusion form is: some A is not B.]
-                                                 $endelseIf
-                                                 $elseIf[$get[cf]==5]
-                                                     $sendMessage[Your conclusion form is: x is A.]
-                                                 $endelseIf
-                                                 $elseIf[$get[cf]==6]
-                                                     $sendMessage[Your conclusion form is: x is not A.]
-                                                 $endelseIf
-                                                 $elseIf[$get[cf]==7]
-                                                     $sendMessage[Your conclusion form is: x is y.]
-                                                 $endelseIf
-                                                 $elseIf[$get[cf]==8]
-                                                     $sendMessage[Your conclusion form is: x is not y.]
-                                                 $endelseIf
-                                                 $elseIf[$get[cf]==undefined]
-                                                     $stop[Error. Please make a selection next time!]
-                                                 $endelseIf
-                                                 $else
-                                                 $stop[Unknown error. Please review code.]
-                                             $endIf
+                                             $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
+                                             $sendMessage[Your conclusion form is: $objectGet[$get[cf]].]
                                              $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
                                              $onlyIf[$charCount[$get[ct1]]==1;Error. Please only include a single letter next time.]
                                              $onlyIf[$isNumber[$get[ct1]]==false;Error. Please only include a single letter next time!]
@@ -1073,35 +875,8 @@ P5: $if[[$get[p5f]==1]all $get[p5t1] is $get[p5t2]$elseIf[$get[p5f]==2]no $get[p
                                                  {value=8}
                                                  }
                                                  ;;30s;p6form]
-                                                 $if[$get[p6f]==1]
-                                                     $sendMessage[Your premise 6 form is: all A is B.]
-                                                     $elseIf[$get[p6f]==2]
-                                                         $sendMessage[Your premise 6 form is: no A is B.]
-                                                     $endelseIf
-                                                     $elseIf[$get[[p6f]==3]
-                                                         $sendMessage[Your premise 6 form is: some A is B.]
-                                                     $endelseIf
-                                                     $elseIf[$get[p6f]==4]
-                                                         $sendMessage[Your premise 6 form is: some A is not B.]
-                                                     $endelseIf
-                                                     $elseIf[$get[p6f]==5]
-                                                         $sendMessage[Your premise 6 form is: x is A.]
-                                                     $endelseIf
-                                                     $elseIf[$get[p6f]==6]
-                                                         $sendMessage[Your premise 6 form is: x is not A.]
-                                                     $endelseIf
-                                                     $elseIf[$get[p6f]==7]
-                                                         $sendMessage[Your premise 6 form is: x is y.]
-                                                     $endelseIf
-                                                     $elseIf[$get[p6f]==8]
-                                                         $sendMessage[Your premise 6 form is: x is not y.]
-                                                     $endelseIf
-                                                     $elseIf[$get[p6f]==undefined]
-                                                         $stop[Error. Please make a selection next time!]
-                                                     $endelseIf
-                                                     $else
-                                                     $stop[Unknown error. Please review code.]
-                                                 $endIf
+                                                 $onlyIf[$get[p6f]!=undefined;Error. Please make a selection next time!]
+                                                 $sendMessage[Your conclusion form is: $objectGet[$get[p6f]].]
                                                  $let[p6t1;$awaitMessage[What letter represents the first term of your sixth premise? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
                                                  $onlyIf[$charCount[$get[p6t1]]==1;Error. Please only include a single letter next time.]
                                                  $onlyIf[$isNumber[$get[p6t1]]==false;Error. Please only include a single letter next time!]
@@ -1149,35 +924,8 @@ P5: $if[[$get[p5f]==1]all $get[p5t1] is $get[p5t2]$elseIf[$get[p5f]==2]no $get[p
                                                      {value=8}
                                                      }
                                                      ;;30s;cform]
-                                                     $if[$get[cf]==1]
-                                                         $sendMessage[Your conclusion form is: all A is B.]
-                                                         $elseIf[$get[cf]==2]
-                                                             $sendMessage[Your conclusion form is: no A is B.]
-                                                         $endelseIf
-                                                         $elseIf[$get[cf]==3]
-                                                             $sendMessage[Your conclusion form is: some A is B.]
-                                                         $endelseIf
-                                                         $elseIf[$get[cf]==4]
-                                                             $sendMessage[Your conclusion form is: some A is not B.]
-                                                         $endelseIf
-                                                         $elseIf[$get[cf]==5]
-                                                             $sendMessage[Your conclusion form is: x is A.]
-                                                         $endelseIf
-                                                         $elseIf[$get[cf]==6]
-                                                             $sendMessage[Your conclusion form is: x is not A.]
-                                                         $endelseIf
-                                                         $elseIf[$get[cf]==7]
-                                                             $sendMessage[Your conclusion form is: x is y.]
-                                                         $endelseIf
-                                                         $elseIf[$get[cf]==8]
-                                                             $sendMessage[Your conclusion form is: x is not y.]
-                                                         $endelseIf
-                                                         $elseIf[$get[cf]==undefined]
-                                                             $stop[Error. Please make a selection next time!]
-                                                         $endelseIf
-                                                         $else
-                                                         $stop[Unknown error. Please review code.]
-                                                     $endIf
+                                                     $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
+                                                     $sendMessage[Your conclusion form is: $objectGet[$get[cf]].]
                                                      $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
                                                      $onlyIf[$charCount[$get[ct1]]==1;Error. Please only include a single letter next time.]
                                                      $onlyIf[$isNumber[$get[ct1]]==false;Error. Please only include a single letter next time!]
@@ -1299,35 +1047,8 @@ P6: $if[[$get[p6f]==1]all $get[p6t1] is $get[p6t2]$elseIf[$get[p6f]==2]no $get[p
                                                          {value=8}
                                                          }
                                                          ;;30s;p7form]
-                                                         $if[$get[p7f]==1]
-                                                             $sendMessage[Your premise 7 form is: all A is B.]
-                                                             $elseIf[$get[p7f]==2]
-                                                                 $sendMessage[Your premise 7 form is: no A is B.]
-                                                             $endelseIf
-                                                             $elseIf[$get[[p7f]==3]
-                                                                 $sendMessage[Your premise 7 form is: some A is B.]
-                                                             $endelseIf
-                                                             $elseIf[$get[p7f]==4]
-                                                                 $sendMessage[Your premise 7 form is: some A is not B.]
-                                                             $endelseIf
-                                                             $elseIf[$get[p7f]==5]
-                                                                 $sendMessage[Your premise 7 form is: x is A.]
-                                                             $endelseIf
-                                                             $elseIf[$get[p7f]==6]
-                                                                 $sendMessage[Your premise 7 form is: x is not A.]
-                                                             $endelseIf
-                                                             $elseIf[$get[p7f]==7]
-                                                                 $sendMessage[Your premise 7 form is: x is y.]
-                                                             $endelseIf
-                                                             $elseIf[$get[p7f]==8]
-                                                                 $sendMessage[Your premise 7 form is: x is not y.]
-                                                             $endelseIf
-                                                             $elseIf[$get[p7f]==undefined]
-                                                                 $stop[Error. Please make a selection next time!]
-                                                             $endelseIf
-                                                             $else
-                                                             $stop[Unknown error. Please review code.]
-                                                         $endIf
+                                                         $onlyIf[$get[p7f]!=undefined;Error. Please make a selection next time!]
+                                                         $sendMessage[Your conclusion form is: $objectGet[$get[p7f]].]
                                                          $let[p7t1;$awaitMessage[What letter represents the first term of your seventh premise? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
                                                          $onlyIf[$charCount[$get[p7t1]]==1;Error. Please only include a single letter next time.]
                                                          $onlyIf[$isNumber[$get[p7t1]]==false;Error. Please only include a single letter next time!]
@@ -1375,35 +1096,8 @@ P6: $if[[$get[p6f]==1]all $get[p6t1] is $get[p6t2]$elseIf[$get[p6f]==2]no $get[p
                                                              {value=8}
                                                              }
                                                              ;;30s;cform]
-                                                             $if[$get[cf]==1]
-                                                                 $sendMessage[Your conclusion form is: all A is B.]
-                                                                 $elseIf[$get[cf]==2]
-                                                                     $sendMessage[Your conclusion form is: no A is B.]
-                                                                 $endelseIf
-                                                                 $elseIf[$get[cf]==3]
-                                                                     $sendMessage[Your conclusion form is: some A is B.]
-                                                                 $endelseIf
-                                                                 $elseIf[$get[cf]==4]
-                                                                     $sendMessage[Your conclusion form is: some A is not B.]
-                                                                 $endelseIf
-                                                                 $elseIf[$get[cf]==5]
-                                                                     $sendMessage[Your conclusion form is: x is A.]
-                                                                 $endelseIf
-                                                                 $elseIf[$get[cf]==6]
-                                                                     $sendMessage[Your conclusion form is: x is not A.]
-                                                                 $endelseIf
-                                                                 $elseIf[$get[cf]==7]
-                                                                     $sendMessage[Your conclusion form is: x is y.]
-                                                                 $endelseIf
-                                                                 $elseIf[$get[cf]==8]
-                                                                     $sendMessage[Your conclusion form is: x is not y.]
-                                                                 $endelseIf
-                                                                 $elseIf[$get[cf]==undefined]
-                                                                     $stop[Error. Please make a selection next time!]
-                                                                 $endelseIf
-                                                                 $else
-                                                                 $stop[Unknown error. Please review code.]
-                                                             $endIf
+                                                             $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
+                                                             $sendMessage[Your conclusion form is: $objectGet[$get[cf]].]
                                                              $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
                                                              $onlyIf[$charCount[$get[ct1]]==1;Error. Please only include a single letter next time.]
                                                              $onlyIf[$isNumber[$get[ct1]]==false;Error. Please only include a single letter next time!]
@@ -1535,35 +1229,8 @@ P7: $if[[$get[p7f]==1]all $get[p7t1] is $get[p7t2]$elseIf[$get[p7f]==2]no $get[p
                                                                  {value=8}
                                                                  }
                                                                  ;;30s;p8form]
-                                                                 $if[$get[p8f]==1]
-                                                                     $sendMessage[Your premise 8 form is: all A is B.]
-                                                                     $elseIf[$get[p8f]==2]
-                                                                         $sendMessage[Your premise 8 form is: no A is B.]
-                                                                     $endelseIf
-                                                                     $elseIf[$get[[p8f]==3]
-                                                                         $sendMessage[Your premise 8 form is: some A is B.]
-                                                                     $endelseIf
-                                                                     $elseIf[$get[p8f]==4]
-                                                                         $sendMessage[Your premise 8 form is: some A is not B.]
-                                                                     $endelseIf
-                                                                     $elseIf[$get[p8f]==5]
-                                                                         $sendMessage[Your premise 8 form is: x is A.]
-                                                                     $endelseIf
-                                                                     $elseIf[$get[p8f]==6]
-                                                                         $sendMessage[Your premise 8 form is: x is not A.]
-                                                                     $endelseIf
-                                                                     $elseIf[$get[p8f]==7]
-                                                                         $sendMessage[Your premise 8 form is: x is y.]
-                                                                     $endelseIf
-                                                                     $elseIf[$get[p8f]==8]
-                                                                         $sendMessage[Your premise 8 form is: x is not y.]
-                                                                     $endelseIf
-                                                                     $elseIf[$get[p8f]==undefined]
-                                                                         $stop[Error. Please make a selection next time!]
-                                                                     $endelseIf
-                                                                     $else
-                                                                     $stop[Unknown error. Please review code.]
-                                                                 $endIf
+                                                                 $onlyIf[$get[p8f]!=undefined;Error. Please make a selection next time!]
+                                                                 $sendMessage[Your premise 8 form is: $objectGet[$get[p8f]].]
                                                                  $let[p8t1;$awaitMessage[What letter represents the first term of your eighth premise? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
                                                                  $onlyIf[$charCount[$get[p8t1]]==1;Error. Please only include a single letter next time.]
                                                                  $onlyIf[$isNumber[$get[p8t1]]==false;Error. Please only include a single letter next time!]
@@ -1611,35 +1278,8 @@ P7: $if[[$get[p7f]==1]all $get[p7t1] is $get[p7t2]$elseIf[$get[p7f]==2]no $get[p
                                                                      {value=8}
                                                                      }
                                                                      ;;30s;cform]
-                                                                     $if[$get[cf]==1]
-                                                                         $sendMessage[Your conclusion form is: all A is B.]
-                                                                         $elseIf[$get[cf]==2]
-                                                                             $sendMessage[Your conclusion form is: no A is B.]
-                                                                         $endelseIf
-                                                                         $elseIf[$get[cf]==3]
-                                                                             $sendMessage[Your conclusion form is: some A is B.]
-                                                                         $endelseIf
-                                                                         $elseIf[$get[cf]==4]
-                                                                             $sendMessage[Your conclusion form is: some A is not B.]
-                                                                         $endelseIf
-                                                                         $elseIf[$get[cf]==5]
-                                                                             $sendMessage[Your conclusion form is: x is A.]
-                                                                         $endelseIf
-                                                                         $elseIf[$get[cf]==6]
-                                                                             $sendMessage[Your conclusion form is: x is not A.]
-                                                                         $endelseIf
-                                                                         $elseIf[$get[cf]==7]
-                                                                             $sendMessage[Your conclusion form is: x is y.]
-                                                                         $endelseIf
-                                                                         $elseIf[$get[cf]==8]
-                                                                             $sendMessage[Your conclusion form is: x is not y.]
-                                                                         $endelseIf
-                                                                         $elseIf[$get[cf]==undefined]
-                                                                             $stop[Error. Please make a selection next time!]
-                                                                         $endelseIf
-                                                                         $else
-                                                                         $stop[Unknown error. Please review code.]
-                                                                     $endIf
+                                                                     $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
+                                                                     $sendMessage[Your conclusion form is: $objectGet[$get[cf]].]
                                                                      $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
                                                                      $onlyIf[$charCount[$get[ct1]]==1;Error. Please only include a single letter next time.]
                                                                      $onlyIf[$isNumber[$get[ct1]]==false;Error. Please only include a single letter next time!]
@@ -1781,35 +1421,8 @@ P8: $if[[$get[p8f]==1]all $get[p8t1] is $get[p8t2]$elseIf[$get[p8f]==2]no $get[p
                                                                          {value=8}
                                                                          }
                                                                          ;;30s;p9form]
-                                                                         $if[$get[p9f]==1]
-                                                                             $sendMessage[Your premise 9 form is: all A is B.]
-                                                                             $elseIf[$get[p9f]==2]
-                                                                                 $sendMessage[Your premise 9 form is: no A is B.]
-                                                                             $endelseIf
-                                                                             $elseIf[$get[[p9f]==3]
-                                                                                 $sendMessage[Your premise 9 form is: some A is B.]
-                                                                             $endelseIf
-                                                                             $elseIf[$get[p9f]==4]
-                                                                                 $sendMessage[Your premise 9 form is: some A is not B.]
-                                                                             $endelseIf
-                                                                             $elseIf[$get[p9f]==5]
-                                                                                 $sendMessage[Your premise 9 form is: x is A.]
-                                                                             $endelseIf
-                                                                             $elseIf[$get[p9f]==6]
-                                                                                 $sendMessage[Your premise 9 form is: x is not A.]
-                                                                             $endelseIf
-                                                                             $elseIf[$get[p9f]==7]
-                                                                                 $sendMessage[Your premise 9 form is: x is y.]
-                                                                             $endelseIf
-                                                                             $elseIf[$get[p9f]==8]
-                                                                                 $sendMessage[Your premise 9 form is: x is not y.]
-                                                                             $endelseIf
-                                                                             $elseIf[$get[p9f]==undefined]
-                                                                                 $stop[Error. Please make a selection next time!]
-                                                                             $endelseIf
-                                                                             $else
-                                                                             $stop[Unknown error. Please review code.]
-                                                                         $endIf
+                                                                         $onlyIf[$get[p9f]!=undefined;Error. Please make a selection next time!]
+                                                                         $sendMessage[Your premise 9 form is: $objectGet[$get[p9f]].]
                                                                          $let[p9t1;$awaitMessage[What letter represents the first term of your ninth premise? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
                                                                          $onlyIf[$charCount[$get[p9t1]]==1;Error. Please only include a single letter next time.]
                                                                          $onlyIf[$isNumber[$get[p9t1]]==false;Error. Please only include a single letter next time!]
@@ -1857,35 +1470,8 @@ P8: $if[[$get[p8f]==1]all $get[p8t1] is $get[p8t2]$elseIf[$get[p8f]==2]no $get[p
                                                                              {value=8}
                                                                              }
                                                                              ;;30s;cform]
-                                                                             $if[$get[cf]==1]
-                                                                                 $sendMessage[Your conclusion form is: all A is B.]
-                                                                                 $elseIf[$get[cf]==2]
-                                                                                     $sendMessage[Your conclusion form is: no A is B.]
-                                                                                 $endelseIf
-                                                                                 $elseIf[$get[cf]==3]
-                                                                                     $sendMessage[Your conclusion form is: some A is B.]
-                                                                                 $endelseIf
-                                                                                 $elseIf[$get[cf]==4]
-                                                                                     $sendMessage[Your conclusion form is: some A is not B.]
-                                                                                 $endelseIf
-                                                                                 $elseIf[$get[cf]==5]
-                                                                                     $sendMessage[Your conclusion form is: x is A.]
-                                                                                 $endelseIf
-                                                                                 $elseIf[$get[cf]==6]
-                                                                                     $sendMessage[Your conclusion form is: x is not A.]
-                                                                                 $endelseIf
-                                                                                 $elseIf[$get[cf]==7]
-                                                                                     $sendMessage[Your conclusion form is: x is y.]
-                                                                                 $endelseIf
-                                                                                 $elseIf[$get[cf]==8]
-                                                                                     $sendMessage[Your conclusion form is: x is not y.]
-                                                                                 $endelseIf
-                                                                                 $elseIf[$get[cf]==undefined]
-                                                                                     $stop[Error. Please make a selection next time!]
-                                                                                 $endelseIf
-                                                                                 $else
-                                                                                 $stop[Unknown error. Please review code.]
-                                                                             $endIf
+                                                                             $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
+                                                                             $sendMessage[Your conclusion form is: $objectGet[$get[cf]].]
                                                                              $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
                                                                              $onlyIf[$charCount[$get[ct1]]==1;Error. Please only include a single letter next time.]
                                                                              $onlyIf[$isNumber[$get[ct1]]==false;Error. Please only include a single letter next time!]
@@ -2037,35 +1623,8 @@ P9: $if[[$get[p9f]==1]all $get[p9t1] is $get[p9t2]$elseIf[$get[p9f]==2]no $get[p
                                                                                  {value=8}
                                                                                  }
                                                                                  ;;30s;p10form]
-                                                                                 $if[$get[p10f]==1]
-                                                                                     $sendMessage[Your premise 10 form is: all A is B.]
-                                                                                     $elseIf[$get[p10f]==2]
-                                                                                         $sendMessage[Your premise 10 form is: no A is B.]
-                                                                                     $endelseIf
-                                                                                     $elseIf[$get[[p10f]==3]
-                                                                                         $sendMessage[Your premise 10 form is: some A is B.]
-                                                                                     $endelseIf
-                                                                                     $elseIf[$get[p10f]==4]
-                                                                                         $sendMessage[Your premise 10 form is: some A is not B.]
-                                                                                     $endelseIf
-                                                                                     $elseIf[$get[p10f]==5]
-                                                                                         $sendMessage[Your premise 10 form is: x is A.]
-                                                                                     $endelseIf
-                                                                                     $elseIf[$get[p10f]==6]
-                                                                                         $sendMessage[Your premise 10 form is: x is not A.]
-                                                                                     $endelseIf
-                                                                                     $elseIf[$get[p10f]==7]
-                                                                                         $sendMessage[Your premise 10 form is: x is y.]
-                                                                                     $endelseIf
-                                                                                     $elseIf[$get[p10f]==8]
-                                                                                         $sendMessage[Your premise 10 form is: x is not y.]
-                                                                                     $endelseIf
-                                                                                     $elseIf[$get[p10f]==undefined]
-                                                                                         $stop[Error. Please make a selection next time!]
-                                                                                     $endelseIf
-                                                                                     $else
-                                                                                     $stop[Unknown error. Please review code.]
-                                                                                 $endIf
+                                                                                 $onlyIf[$get[p10f]!=undefined;Error. Please make a selection next time!]
+                                                                                 $sendMessage[Your premise 10 form is: $objectGet[$get[p10f]].]
                                                                                  $let[p10t1;$awaitMessage[What letter represents the first term of your ninth premise? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
                                                                                  $onlyIf[$charCount[$get[p10t1]]==1;Error. Please only include a single letter next time.]
                                                                                  $onlyIf[$isNumber[$get[p10t1]]==false;Error. Please only include a single letter next time!]
@@ -2113,35 +1672,8 @@ P9: $if[[$get[p9f]==1]all $get[p9t1] is $get[p9t2]$elseIf[$get[p9f]==2]no $get[p
                                                                                      {value=8}
                                                                                      }
                                                                                      ;;30s;cform]
-                                                                                     $if[$get[cf]==1]
-                                                                                         $sendMessage[Your conclusion form is: all A is B.]
-                                                                                         $elseIf[$get[cf]==2]
-                                                                                             $sendMessage[Your conclusion form is: no A is B.]
-                                                                                         $endelseIf
-                                                                                         $elseIf[$get[cf]==3]
-                                                                                             $sendMessage[Your conclusion form is: some A is B.]
-                                                                                         $endelseIf
-                                                                                         $elseIf[$get[cf]==4]
-                                                                                             $sendMessage[Your conclusion form is: some A is not B.]
-                                                                                         $endelseIf
-                                                                                         $elseIf[$get[cf]==5]
-                                                                                             $sendMessage[Your conclusion form is: x is A.]
-                                                                                         $endelseIf
-                                                                                         $elseIf[$get[cf]==6]
-                                                                                             $sendMessage[Your conclusion form is: x is not A.]
-                                                                                         $endelseIf
-                                                                                         $elseIf[$get[cf]==7]
-                                                                                             $sendMessage[Your conclusion form is: x is y.]
-                                                                                         $endelseIf
-                                                                                         $elseIf[$get[cf]==8]
-                                                                                             $sendMessage[Your conclusion form is: x is not y.]
-                                                                                         $endelseIf
-                                                                                         $elseIf[$get[cf]==undefined]
-                                                                                             $stop[Error. Please make a selection next time!]
-                                                                                         $endelseIf
-                                                                                         $else
-                                                                                         $stop[Unknown error. Please review code.]
-                                                                                     $endIf
+                                                                                     $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
+                                                                                     $sendMessage[Your conclusion form is: $objectGet[$get[cf]].]
                                                                                      $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
                                                                                      $onlyIf[$charCount[$get[ct1]]==1;Error. Please only include a single letter next time.]
                                                                                      $onlyIf[$isNumber[$get[ct1]]==false;Error. Please only include a single letter next time!]
