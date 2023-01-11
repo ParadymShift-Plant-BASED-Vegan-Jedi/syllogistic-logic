@@ -1,6 +1,17 @@
 $objectCreate[$includeLibrary[vco]]
-$function[m_form]{
-{placeholder=Select}
+$let[p1m;{menu:
+{id=p1form}]
+$let[p2m;{menu:
+{id=p2form}]
+$let[p3m;{menu:
+{id=p3form}]
+$let[p4m;{menu:
+{id=p41form}]
+$let[p5m;{menu:
+{id=p5form}]
+$let[cm;{menu:
+{id=cform}]
+$let[m_form;{placeholder=Select}
 {min=1}
 {max=1}
 {label=all A is B}
@@ -19,17 +30,21 @@ $function[m_form]{
 {value=7}
 {label=x is not y}
 {value=8}
-}
-}
-$function[cf_menu]{
+}]
+$function[cf_menu]
 $let[cf;$awaitmenu[What is the form of your conclusion?
 {title: Conclusion Form}
+{menu:
+{id=cform}
 $m_form
 ;;30s;cform]]
-}
 $let[bc;$awaitButton[Does your argument have at least one premise?{button:Yes:GREEN::y}{button:No:RED::n};;30s;y;n]]
 $if[bc==n]
-    $cf_menu
+    $let[cf;$awaitMenu[What is the form of your conclusion?
+    {title: Conclusion Form}
+    $get[cm]
+    $get[m_form]
+    ;;30s;cform]]
     $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
     $sendMessage[Your conclusion form is: $objectGet[$get[cf]]]
     $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
@@ -88,10 +103,9 @@ $if[bc==n]
     $elseIf[$get[bc]==y]
         $let[p1f;$awaitMenu[Let's create your first premise. What is the form of premise 1?
         {title: Premise 1 Form}
-        {menu:
-        {id=p1form}
+        $get[p1m]
         $m_form
-        ;;30s;p1form]
+        ;;30s;p1form]]
         $onlyIf[$get[p1f]!=undefined;Error. Please make a selection next time!]
         $sendMessage[Your premise 1 form is: $objectGet[$get[p1f]]]
         $let[p1t1;$awaitMessage[What letter represents the first term of your first premise? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
@@ -116,7 +130,11 @@ $if[bc==n]
         $sendMessage[Your first premise is: $if[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p1t1] is $get[p1t2]$endelseif$elseif[$get[p1f]==3]some $get[p1t1] is [$get[p1t2]$endelseif$elseIf[$get[p1f==4]some $get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[[p1f]==5]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==6]$get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[p1f]==7]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==8]$get[p1t1] is not $get[p1t2]$endelseif$endIf]
         $let[bc;$awaitButton[Does your argument have a second premise?{button:Yes:GREEN::y}{button:No:RED::n};;20s;y;n]]
         $if[$get[bc]==n]
-            $cf_menu
+            $let[cf;$awaitMenu[What is the form of your conclusion?
+            {title: Conclusion Form}
+            $get[cm]
+            $get[m_form]
+            ;;30s;cform]]
             $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
             $sendMessage[Your conclusion form is: $objectGet[$get[cf]]]
             $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
@@ -191,10 +209,9 @@ P1: $if[[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p
              $elseIf[$get[bc]==y]
                  $let[p2f;$awaitMenu[Let's create your second premise. What is the form of premise 2?
                  {title: Premise 2 Form}
-                 {menu:
-                 {id=p2form}
+                 $get[p2m]
                  $m_form
-                 ;;30s;p2form]
+                 ;;30s;p2form]]
                  $onlyIf[$get[p1f]!=undefined;Error. Please make a selection next time!]
                  $sendMessage[Your premise 1 form is: $objectGet[$get[p1f]]]
                  $let[p2t1;$awaitMessage[What letter represents the first term of your second premise? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
@@ -219,7 +236,11 @@ P1: $if[[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p
                  $sendMessage[Your second premise is: $if[$get[p2f]==1]all $get[p2t1] is $get[p2t2]$elseIf[$get[p2f]==2]no $get[p2t1] is $get[p2t2]$endelseif$elseif[$get[p2f]==3]some $get[p2t1] is [$get[p2t2]$endelseif$elseIf[$get[p2f==4]some $get[p2t1] is not $get[p2t2]$endelseif$elseIf[$get[[p2f]==5]$get[p2t1] is $get[p2t2]$endelseif$elseIf[$get[p2f]==6]$get[p2t1] is not $get[p2t2]$endelseif$elseIf[$get[p2f]==7]$get[p2t1] is $get[p2t2]$endelseif$elseIf[$get[p2f]==8]$get[p2t1] is not $get[p2t2]$endelseif$endIf]
                  $let[bc;$awaitButton[Does your argument have a third premise?{button:Yes:GREEN::y}{button:No:RED::n};;20s;y;n]]
                  $if[$get[bc]==n]
-                     $cf_menu
+                     $let[cf;$awaitMenu[What is the form of your conclusion?
+                     {title: Conclusion Form}
+                     $get[cm]
+                     $get[m_form]
+                     ;;30s;cform]]
                      $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
                      $sendMessage[Your conclusion form is: $objectGet[$get[cf]]]
                      $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
@@ -317,10 +338,9 @@ P2: $if[[$get[p2f]==1]all $get[p2t1] is $get[p2t2]$elseIf[$get[p2f]==2]no $get[p
                      $elseIf[$get[bc]==y]
                          $let[p3f;$awaitMenu[Let's create your third premise. What is the form of premise 3?
                          {title: Premise 3 Form}
-                         {menu:
-                         {id=p3form}
+                         $get[p3m]
                          $m_form
-                         ;;30s;p3form]
+                         ;;30s;p3form]]
                          $onlyIf[$get[p3f]!=undefined;Error. Please make a selection next time!]
                          $sendMessage[Your premise 3 form is: $objectGet[$get[p3f]]]
                          $let[p3t1;$awaitMessage[What letter represents the first term of your third premise? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
@@ -345,7 +365,11 @@ P2: $if[[$get[p2f]==1]all $get[p2t1] is $get[p2t2]$elseIf[$get[p2f]==2]no $get[p
                          $sendMessage[Your third premise is: $if[$get[p3f]==1]all $get[p3t1] is $get[p3t2]$elseIf[$get[p3f]==2]no $get[p3t1] is $get[p3t2]$endelseif$elseif[$get[p3f]==3]some $get[p3t1] is [$get[p3t2]$endelseif$elseIf[$get[p3f==4]some $get[p3t1] is not $get[p3t2]$endelseif$elseIf[$get[[p3f]==5]$get[p3t1] is $get[p3t2]$endelseif$elseIf[$get[p3f]==6]$get[p3t1] is not $get[p3t2]$endelseif$elseIf[$get[p3f]==7]$get[p3t1] is $get[p3t2]$endelseif$elseIf[$get[p3f]==8]$get[p3t1] is not $get[p3t2]$endelseif$endIf]
                          $let[bc;$awaitButton[Does your argument have a fourth premise?{button:Yes:GREEN::y}{button:No:RED::n};;20s;y;n]]
                          $if[$get[bc]==n]
-                             $cf_menu
+                             $let[cf;$awaitMenu[What is the form of your conclusion?
+                             {title: Conclusion Form}
+                             $get[cm]
+                             $get[m_form]
+                             ;;30s;cform]]
                              $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
                              $sendMessage[Your conclusion form is: $objectGet[$get[cf]].]
                              $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
@@ -419,7 +443,7 @@ P3: $if[[$get[p3f]==1]all $get[p3t1] is $get[p3t2]$elseIf[$get[p3f]==2]no $get[p
                                  {menu:
                                  {id=p4form}
                                  $m_form
-                                 ;;30s;p4form]
+                                 ;;30s;p4form]]
                                  $onlyIf[$get[p4f]!=undefined;Error. Please make a selection next time!]
                                  $sendMessage[Your premise 4 form is: $objectGet[$get[[p4f]].]
                                  $let[p4t1;$awaitMessage[What letter represents the first term of your fourth premise? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
@@ -444,7 +468,11 @@ P3: $if[[$get[p3f]==1]all $get[p3t1] is $get[p3t2]$elseIf[$get[p3f]==2]no $get[p
                                  $sendMessage[Your fourth premise is: $if[$get[p4f]==1]all $get[p4t1] is $get[p4t2]$elseIf[$get[p4f]==2]no $get[p4t1] is $get[p4t2]$endelseif$elseif[$get[p4f]==3]some $get[p4t1] is [$get[p4t2]$endelseif$elseIf[$get[p4f==4]some $get[p4t1] is not $get[p4t2]$endelseif$elseIf[$get[[p4f]==5]$get[p4t1] is $get[p4t2]$endelseif$elseIf[$get[p4f]==6]$get[p4t1] is not $get[p4t2]$endelseif$elseIf[$get[p4f]==7]$get[p4t1] is $get[p4t2]$endelseif$elseIf[$get[p4f]==8]$get[p4t1] is not $get[p4t2]$endelseif$endIf]
                                  $let[bc;$awaitButton[Does your argument have a fifth premise?{button:Yes:GREEN::y}{button:No:RED::n};;20s;y;n]]
                                  $if[$get[bc]==n]
-                                     $cf_menu
+                                     $let[cf;$awaitMenu[What is the form of your conclusion?
+                                     {title: Conclusion Form}
+                                     $get[cm]
+                                     $get[m_form]
+                                     ;;30s;cform]]
                                      $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
                                      $sendMessage[Your conclusion form is: $objectGet[$get[cf]].]
                                      $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
@@ -525,7 +553,7 @@ P4: $if[[$get[p4f]==1]all $get[p4t1] is $get[p4t2]$elseIf[$get[p4f]==2]no $get[p
                                          {menu:
                                          {id=p5form}
                                          $m_form
-                                         ;;30s;p5form]
+                                         ;;30s;p5form]]
                                          $onlyIf[$get[p5f]!=undefined;Error. Please make a selection next time!]
                                          $sendMessage[Your premise 5 form is: $objectGet[$get[p5f]].]
                                          $let[p5t1;$awaitMessage[What letter represents the first term of your fifth premise? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
@@ -550,7 +578,11 @@ P4: $if[[$get[p4f]==1]all $get[p4t1] is $get[p4t2]$elseIf[$get[p4f]==2]no $get[p
                                          $sendMessage[Your fifth premise is: $if[$get[p5f]==1]all $get[p5t1] is $get[p5t2]$elseIf[$get[p5f]==2]no $get[p5t1] is $get[p5t2]$endelseif$elseif[$get[p5f]==3]some $get[p5t1] is [$get[p5t2]$endelseif$elseIf[$get[p5f==4]some $get[p5t1] is not $get[p5t2]$endelseif$elseIf[$get[[p5f]==5]$get[p5t1] is $get[p5t2]$endelseif$elseIf[$get[p5f]==6]$get[p5t1] is not $get[p5t2]$endelseif$elseIf[$get[p5f]==7]$get[p5t1] is $get[p5t2]$endelseif$elseIf[$get[p5f]==8]$get[p5t1] is not $get[p5t2]$endelseif$endIf]
                                          $let[bc;$awaitButton[Does your argument have a sixth premise?{button:Yes:GREEN::y}{button:No:RED::n};;20s;y;n]]
                                          $if[$get[bc]==n]
-                                             $cf_menu
+                                             $let[cf;$awaitMenu[What is the form of your conclusion?
+                                             {title: Conclusion Form}
+                                             $get[cm]
+                                             $get[m_form]
+                                             ;;30s;cform]]
                                              $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
                                              $sendMessage[Your conclusion form is: $objectGet[$get[cf]].]
                                              $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY; also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
