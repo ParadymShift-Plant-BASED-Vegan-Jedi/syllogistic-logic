@@ -31,15 +31,8 @@ $let[m_form;{placeholder=Select}
 {label=x is not y}
 {value=8}
 }]
-$function[cf_menu]
-$let[cf;$awaitmenu[What is the form of your conclusion?
-{title: Conclusion Form}
-{menu:
-{id=cform}
-$m_form
-;;30s;cform]]
 $let[bc;$awaitButton[Does your argument have at least one premise?{button:Yes:GREEN::y}{button:No:RED::n};;30s;y;n]]
-$if[bc==n]
+$if[$get[bc]==n]
     $let[cf;$awaitMenu[What is the form of your conclusion?
     {title: Conclusion Form}
     $get[cm]
@@ -157,7 +150,7 @@ $if[bc==n]
                 $endelseif
             $endIf
             $sendMessage[Your final argument is: 
-P1: $if[[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p1t1] is $get[p1t2]$endelseif$elseif[$get[p1f]==3]some $get[p1t1] is [$get[p1t2]$endelseif$elseIf[$get[p1f==4]some $get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[[p1f]==5]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==6]$get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[p1f]==7]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==8]$get[p1t1] is not $get[p1t2]$endelseif$endIf
+P1: $if[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p1t1] is $get[p1t2]$endelseif$elseif[$get[p1f]==3]some $get[p1t1] is [$get[p1t2]$endelseif$elseIf[$get[p1f==4]some $get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[[p1f]==5]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==6]$get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[p1f]==7]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==8]$get[p1t1] is not $get[p1t2]$endelseif$endIf
 ∴ $if[$get[cf]==1]all $get[ct1] is $get[ct2]$elseIf[$get[cf]==2]no $get[ct1] is $get[ct2]$endelseif$elseif[$get[cf]==3]some $get[ct1] is [$get[ct2]$endelseif$elseIf[$get[cf==4]some $get[ct1] is not $get[ct2]$endelseif$elseIf[$get[cf]==5]$get[ct1] is $get[ct2]$endelseif$elseIf[$get[cf]==6]$get[ct1] is not $get[ct2]$endelseif$elseIf[$get[cf]==7]$get[ct1] is $get[ct2]$endelseif$elseIf[$get[cf]==8]$get[ct1] is not $get[ct2]$endelseif$endIf]
             $if[$get[p1f]==1||$get[p1f]==3||$get[p1f]==5||$get[p1f]==7]
                 $let[rc;0]
@@ -213,7 +206,7 @@ P1: $if[[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p
                  $m_form
                  ;;30s;p2form]]
                  $onlyIf[$get[p1f]!=undefined;Error. Please make a selection next time!]
-                 $sendMessage[Your premise 1 form is: $objectGet[$get[p1f]]]
+                 $sendMessage[Your premise 2 form is: $objectGet[$get[p1f]]]
                  $let[p2t1;$awaitMessage[What letter represents the first term of your second premise? (Please enter a SINGLE letter ONLY#SEMI# also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
                  $onlyIf[$charCount[$get[p2t1]]==1;Error. Please only include a single letter next time.]
                  $onlyIf[$isNumber[$get[p2t1]]==false;Error. Please only include a single letter next time!]
@@ -263,8 +256,8 @@ P1: $if[[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p
                          $endelseif
                      $endIf
                      $sendMessage[Your final argument is: 
-P1: $if[[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p1t1] is $get[p1t2]$endelseif$elseif[$get[p1f]==3]some $get[p1t1] is [$get[p1t2]$endelseif$elseIf[$get[p1f==4]some $get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[[p1f]==5]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==6]$get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[p1f]==7]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==8]$get[p1t1] is not $get[p1t2]$endelseif$endIf
-P2: $if[[$get[p2f]==1]all $get[p2t1] is $get[p2t2]$elseIf[$get[p2f]==2]no $get[p2t1] is $get[p2t2]$endelseif$elseif[$get[p2f]==3]some $get[p2t1] is [$get[p2t2]$endelseif$elseIf[$get[p2f==4]some $get[p2t1] is not $get[p2t2]$endelseif$elseIf[$get[[p2f]==5]$get[p2t1] is $get[p2t2]$endelseif$elseIf[$get[p2f]==6]$get[p2t1] is not $get[p2t2]$endelseif$elseIf[$get[p2f]==7]$get[p2t1] is $get[p2t2]$endelseif$elseIf[$get[p2f]==8]$get[p2t1] is not $get[p2t2]$endelseif$endIf
+P1: $if[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p1t1] is $get[p1t2]$endelseif$elseif[$get[p1f]==3]some $get[p1t1] is [$get[p1t2]$endelseif$elseIf[$get[p1f==4]some $get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[[p1f]==5]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==6]$get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[p1f]==7]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==8]$get[p1t1] is not $get[p1t2]$endelseif$endIf
+P2: $if[$get[p2f]==1]all $get[p2t1] is $get[p2t2]$elseIf[$get[p2f]==2]no $get[p2t1] is $get[p2t2]$endelseif$elseif[$get[p2f]==3]some $get[p2t1] is [$get[p2t2]$endelseif$elseIf[$get[p2f==4]some $get[p2t1] is not $get[p2t2]$endelseif$elseIf[$get[[p2f]==5]$get[p2t1] is $get[p2t2]$endelseif$elseIf[$get[p2f]==6]$get[p2t1] is not $get[p2t2]$endelseif$elseIf[$get[p2f]==7]$get[p2t1] is $get[p2t2]$endelseif$elseIf[$get[p2f]==8]$get[p2t1] is not $get[p2t2]$endelseif$endIf
 ∴ $if[$get[cf]==1]all $get[ct1] is $get[ct2]$elseIf[$get[cf]==2]no $get[ct1] is $get[ct2]$endelseif$elseif[$get[cf]==3]some $get[ct1] is [$get[ct2]$endelseif$elseIf[$get[cf==4]some $get[ct1] is not $get[ct2]$endelseif$elseIf[$get[cf]==5]$get[ct1] is $get[ct2]$endelseif$elseIf[$get[cf]==6]$get[ct1] is not $get[ct2]$endelseif$elseIf[$get[cf]==7]$get[ct1] is $get[ct2]$endelseif$elseIf[$get[cf]==8]$get[ct1] is not $get[ct2]$endelseif$endIf]
                      $if[$get[p1f]==1||$get[p1f]==3||$get[p1f]==5||$get[p1f]==7]
                          $let[rc;0]
@@ -372,10 +365,10 @@ P2: $if[[$get[p2f]==1]all $get[p2t1] is $get[p2t2]$elseIf[$get[p2f]==2]no $get[p
                              ;;30s;cform]]
                              $onlyIf[$get[cf]!=undefined;Error. Please make a selection next time!]
                              $sendMessage[Your conclusion form is: $objectGet[$get[cf]].]
-                             $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY#SEMI# also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
+                             $let[ct1;$awaitMessage[What letter represents the first term of your conclusion? (Please enter a SINGLE letter ONLY#SEMI# also note that the correct case #LEFT#whether upper or lower#RIGHT# will be automatically applied).;$authorID;30s;no]]
                              $onlyIf[$charCount[$get[ct1]]==1;Error. Please only include a single letter next time.]
                              $onlyIf[$isNumber[$get[ct1]]==false;Error. Please only include a single letter next time!]
-                             $let[ct2;$awaitMessage[What letter represents the second term of your conclusion? (Please enter a SINGLE letter ONLY#SEMI# also note that the correct case :LEFT:whether upper or lower:RIGHT: will be automatically applied).;$authorID;20s;no]]
+                             $let[ct2;$awaitMessage[What letter represents the second term of your conclusion? (Please enter a SINGLE letter ONLY#SEMI# also note that the correct case #LEFT#whether upper or lower#RIGHT# will be automatically applied).;$authorID;30s;no]]
                              $onlyIf[$charCount[$get[ct2]]==1;Error. Please only include a single letter next time.]
                              $onlyIf[$isNumber[$get[ct2]]==false;Error. Please only include a single letter next time!]
                              $if[$get[cf]<5]
@@ -392,9 +385,9 @@ P2: $if[[$get[p2f]==1]all $get[p2t1] is $get[p2t2]$elseIf[$get[p2f]==2]no $get[p
                                  $endelseif
                              $endIf
                              $sendMessage[Your final argument is: 
-P1: $if[[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p1t1] is $get[p1t2]$endelseif$elseif[$get[p1f]==3]some $get[p1t1] is [$get[p1t2]$endelseif$elseIf[$get[p1f==4]some $get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[[p1f]==5]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==6]$get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[p1f]==7]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==8]$get[p1t1] is not $get[p1t2]$endelseif$endIf
-P2: $if[[$get[p2f]==1]all $get[p2t1] is $get[p2t2]$elseIf[$get[p2f]==2]no $get[p2t1] is $get[p2t2]$endelseif$elseif[$get[p2f]==3]some $get[p2t1] is [$get[p2t2]$endelseif$elseIf[$get[p2f==4]some $get[p2t1] is not $get[p2t2]$endelseif$elseIf[$get[[p2f]==5]$get[p2t1] is $get[p2t2]$endelseif$elseIf[$get[p2f]==6]$get[p2t1] is not $get[p2t2]$endelseif$elseIf[$get[p2f]==7]$get[p2t1] is $get[p2t2]$endelseif$elseIf[$get[p2f]==8]$get[p2t1] is not $get[p2t2]$endelseif$endIf
-P3: $if[[$get[p3f]==1]all $get[p3t1] is $get[p3t2]$elseIf[$get[p3f]==2]no $get[p3t1] is $get[p3t2]$endelseif$elseif[$get[p3f]==3]some $get[p3t1] is [$get[p3t2]$endelseif$elseIf[$get[p3f==4]some $get[p3t1] is not $get[p3t2]$endelseif$elseIf[$get[[p3f]==5]$get[p3t1] is $get[p3t2]$endelseif$elseIf[$get[p3f]==6]$get[p3t1] is not $get[p3t2]$endelseif$elseIf[$get[p3f]==7]$get[p3t1] is $get[p3t2]$endelseif$elseIf[$get[p3f]==8]$get[p3t1] is not $get[p3t2]$endelseif$endIf
+P1: $if[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p1t1] is $get[p1t2]$endelseif$elseif[$get[p1f]==3]some $get[p1t1] is [$get[p1t2]$endelseif$elseIf[$get[p1f==4]some $get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[[p1f]==5]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==6]$get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[p1f]==7]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==8]$get[p1t1] is not $get[p1t2]$endelseif$endIf
+P2: $if[$get[p2f]==1]all $get[p2t1] is $get[p2t2]$elseIf[$get[p2f]==2]no $get[p2t1] is $get[p2t2]$endelseif$elseif[$get[p2f]==3]some $get[p2t1] is [$get[p2t2]$endelseif$elseIf[$get[p2f==4]some $get[p2t1] is not $get[p2t2]$endelseif$elseIf[$get[[p2f]==5]$get[p2t1] is $get[p2t2]$endelseif$elseIf[$get[p2f]==6]$get[p2t1] is not $get[p2t2]$endelseif$elseIf[$get[p2f]==7]$get[p2t1] is $get[p2t2]$endelseif$elseIf[$get[p2f]==8]$get[p2t1] is not $get[p2t2]$endelseif$endIf
+P3: $if[$get[p3f]==1]all $get[p3t1] is $get[p3t2]$elseIf[$get[p3f]==2]no $get[p3t1] is $get[p3t2]$endelseif$elseif[$get[p3f]==3]some $get[p3t1] is [$get[p3t2]$endelseif$elseIf[$get[p3f==4]some $get[p3t1] is not $get[p3t2]$endelseif$elseIf[$get[[p3f]==5]$get[p3t1] is $get[p3t2]$endelseif$elseIf[$get[p3f]==6]$get[p3t1] is not $get[p3t2]$endelseif$elseIf[$get[p3f]==7]$get[p3t1] is $get[p3t2]$endelseif$elseIf[$get[p3f]==8]$get[p3t1] is not $get[p3t2]$endelseif$endIf
 ∴ $if[$get[cf]==1]all $get[ct1] is $get[ct2]$elseIf[$get[cf]==2]no $get[ct1] is $get[ct2]$endelseif$elseif[$get[cf]==3]some $get[ct1] is [$get[ct2]$endelseif$elseIf[$get[cf==4]some $get[ct1] is not $get[ct2]$endelseif$elseIf[$get[cf]==5]$get[ct1] is $get[ct2]$endelseif$elseIf[$get[cf]==6]$get[ct1] is not $get[ct2]$endelseif$elseIf[$get[cf]==7]$get[ct1] is $get[ct2]$endelseif$elseIf[$get[cf]==8]$get[ct1] is not $get[ct2]$endelseif$endIf]
                              $if[$get[p1f]==1||$get[p1f]==3||$get[p1f]==5||$get[p1f]==7]
                                  $let[rc;0]
@@ -440,8 +433,7 @@ P3: $if[[$get[p3f]==1]all $get[p3t1] is $get[p3t2]$elseIf[$get[p3f]==2]no $get[p
                              $elseIf[$get[bc]==y]
                                  $let[p4f;$awaitMenu[Let's create your fourth premise. What is the form of premise 4?
                                  {title: Premise 4 Form}
-                                 {menu:
-                                 {id=p4form}
+                                 $get[p4m]
                                  $m_form
                                  ;;30s;p4form]]
                                  $onlyIf[$get[p4f]!=undefined;Error. Please make a selection next time!]
@@ -495,10 +487,10 @@ P3: $if[[$get[p3f]==1]all $get[p3t1] is $get[p3t2]$elseIf[$get[p3f]==2]no $get[p
                                          $endelseif
                                      $endIf
                                      $sendMessage[Your final argument is: 
-P1: $if[[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p1t1] is $get[p1t2]$endelseif$elseif[$get[p1f]==3]some $get[p1t1] is [$get[p1t2]$endelseif$elseIf[$get[p1f==4]some $get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[[p1f]==5]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==6]$get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[p1f]==7]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==8]$get[p1t1] is not $get[p1t2]$endelseif$endIf
-P2: $if[[$get[p2f]==1]all $get[p2t1] is $get[p2t2]$elseIf[$get[p2f]==2]no $get[p2t1] is $get[p2t2]$endelseif$elseif[$get[p2f]==3]some $get[p2t1] is [$get[p2t2]$endelseif$elseIf[$get[p2f==4]some $get[p2t1] is not $get[p2t2]$endelseif$elseIf[$get[[p2f]==5]$get[p2t1] is $get[p2t2]$endelseif$elseIf[$get[p2f]==6]$get[p2t1] is not $get[p2t2]$endelseif$elseIf[$get[p2f]==7]$get[p2t1] is $get[p2t2]$endelseif$elseIf[$get[p2f]==8]$get[p2t1] is not $get[p2t2]$endelseif$endIf
-P3: $if[[$get[p3f]==1]all $get[p3t1] is $get[p3t2]$elseIf[$get[p3f]==2]no $get[p3t1] is $get[p3t2]$endelseif$elseif[$get[p3f]==3]some $get[p3t1] is [$get[p3t2]$endelseif$elseIf[$get[p3f==4]some $get[p3t1] is not $get[p3t2]$endelseif$elseIf[$get[[p3f]==5]$get[p3t1] is $get[p3t2]$endelseif$elseIf[$get[p3f]==6]$get[p3t1] is not $get[p3t2]$endelseif$elseIf[$get[p3f]==7]$get[p3t1] is $get[p3t2]$endelseif$elseIf[$get[p3f]==8]$get[p3t1] is not $get[p3t2]$endelseif$endIf
-P4: $if[[$get[p4f]==1]all $get[p4t1] is $get[p4t2]$elseIf[$get[p4f]==2]no $get[p4t1] is $get[p4t2]$endelseif$elseif[$get[p4f]==3]some $get[p4t1] is [$get[p4t2]$endelseif$elseIf[$get[p4f==4]some $get[p4t1] is not $get[p4t2]$endelseif$elseIf[$get[[p4f]==5]$get[p4t1] is $get[p4t2]$endelseif$elseIf[$get[p4f]==6]$get[p4t1] is not $get[p4t2]$endelseif$elseIf[$get[p4f]==7]$get[p4t1] is $get[p4t2]$endelseif$elseIf[$get[p4f]==8]$get[p4t1] is not $get[p4t2]$endelseif$endIf
+P1: $if[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p1t1] is $get[p1t2]$endelseif$elseif[$get[p1f]==3]some $get[p1t1] is [$get[p1t2]$endelseif$elseIf[$get[p1f==4]some $get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[[p1f]==5]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==6]$get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[p1f]==7]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==8]$get[p1t1] is not $get[p1t2]$endelseif$endIf
+P2: $if[$get[p2f]==1]all $get[p2t1] is $get[p2t2]$elseIf[$get[p2f]==2]no $get[p2t1] is $get[p2t2]$endelseif$elseif[$get[p2f]==3]some $get[p2t1] is [$get[p2t2]$endelseif$elseIf[$get[p2f==4]some $get[p2t1] is not $get[p2t2]$endelseif$elseIf[$get[[p2f]==5]$get[p2t1] is $get[p2t2]$endelseif$elseIf[$get[p2f]==6]$get[p2t1] is not $get[p2t2]$endelseif$elseIf[$get[p2f]==7]$get[p2t1] is $get[p2t2]$endelseif$elseIf[$get[p2f]==8]$get[p2t1] is not $get[p2t2]$endelseif$endIf
+P3: $if[$get[p3f]==1]all $get[p3t1] is $get[p3t2]$elseIf[$get[p3f]==2]no $get[p3t1] is $get[p3t2]$endelseif$elseif[$get[p3f]==3]some $get[p3t1] is [$get[p3t2]$endelseif$elseIf[$get[p3f==4]some $get[p3t1] is not $get[p3t2]$endelseif$elseIf[$get[[p3f]==5]$get[p3t1] is $get[p3t2]$endelseif$elseIf[$get[p3f]==6]$get[p3t1] is not $get[p3t2]$endelseif$elseIf[$get[p3f]==7]$get[p3t1] is $get[p3t2]$endelseif$elseIf[$get[p3f]==8]$get[p3t1] is not $get[p3t2]$endelseif$endIf
+P4: $if[$get[p4f]==1]all $get[p4t1] is $get[p4t2]$elseIf[$get[p4f]==2]no $get[p4t1] is $get[p4t2]$endelseif$elseif[$get[p4f]==3]some $get[p4t1] is [$get[p4t2]$endelseif$elseIf[$get[p4f==4]some $get[p4t1] is not $get[p4t2]$endelseif$elseIf[$get[[p4f]==5]$get[p4t1] is $get[p4t2]$endelseif$elseIf[$get[p4f]==6]$get[p4t1] is not $get[p4t2]$endelseif$elseIf[$get[p4f]==7]$get[p4t1] is $get[p4t2]$endelseif$elseIf[$get[p4f]==8]$get[p4t1] is not $get[p4t2]$endelseif$endIf
 ∴ $if[$get[cf]==1]all $get[ct1] is $get[ct2]$elseIf[$get[cf]==2]no $get[ct1] is $get[ct2]$endelseif$elseif[$get[cf]==3]some $get[ct1] is [$get[ct2]$endelseif$elseIf[$get[cf==4]some $get[ct1] is not $get[ct2]$endelseif$elseIf[$get[cf]==5]$get[ct1] is $get[ct2]$endelseif$elseIf[$get[cf]==6]$get[ct1] is not $get[ct2]$endelseif$elseIf[$get[cf]==7]$get[ct1] is $get[ct2]$endelseif$elseIf[$get[cf]==8]$get[ct1] is not $get[ct2]$endelseif$endIf]
                                      $if[$get[p1f]==1||$get[p1f]==3||$get[p1f]==5||$get[p1f]==7]
                                          $let[rc;0]
@@ -550,8 +542,7 @@ P4: $if[[$get[p4f]==1]all $get[p4t1] is $get[p4t2]$elseIf[$get[p4f]==2]no $get[p
                                      $elseIf[$get[bc]==y]
                                          $let[p5f;$awaitMenu[Let's create your fifth premise. What is the form of premise 5?
                                          {title: Premise 5 Form}
-                                         {menu:
-                                         {id=p5form}
+                                         $get[p5m]
                                          $m_form
                                          ;;30s;p5form]]
                                          $onlyIf[$get[p5f]!=undefined;Error. Please make a selection next time!]
@@ -605,11 +596,11 @@ P4: $if[[$get[p4f]==1]all $get[p4t1] is $get[p4t2]$elseIf[$get[p4f]==2]no $get[p
                                                  $endelseif
                                              $endIf
                                              $sendMessage[Your final argument is: 
-P1: $if[[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p1t1] is $get[p1t2]$endelseif$elseif[$get[p1f]==3]some $get[p1t1] is [$get[p1t2]$endelseif$elseIf[$get[p1f==4]some $get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[[p1f]==5]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==6]$get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[p1f]==7]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==8]$get[p1t1] is not $get[p1t2]$endelseif$endIf
-P2: $if[[$get[p2f]==1]all $get[p2t1] is $get[p2t2]$elseIf[$get[p2f]==2]no $get[p2t1] is $get[p2t2]$endelseif$elseif[$get[p2f]==3]some $get[p2t1] is [$get[p2t2]$endelseif$elseIf[$get[p2f==4]some $get[p2t1] is not $get[p2t2]$endelseif$elseIf[$get[[p2f]==5]$get[p2t1] is $get[p2t2]$endelseif$elseIf[$get[p2f]==6]$get[p2t1] is not $get[p2t2]$endelseif$elseIf[$get[p2f]==7]$get[p2t1] is $get[p2t2]$endelseif$elseIf[$get[p2f]==8]$get[p2t1] is not $get[p2t2]$endelseif$endIf
-P3: $if[[$get[p3f]==1]all $get[p3t1] is $get[p3t2]$elseIf[$get[p3f]==2]no $get[p3t1] is $get[p3t2]$endelseif$elseif[$get[p3f]==3]some $get[p3t1] is [$get[p3t2]$endelseif$elseIf[$get[p3f==4]some $get[p3t1] is not $get[p3t2]$endelseif$elseIf[$get[[p3f]==5]$get[p3t1] is $get[p3t2]$endelseif$elseIf[$get[p3f]==6]$get[p3t1] is not $get[p3t2]$endelseif$elseIf[$get[p3f]==7]$get[p3t1] is $get[p3t2]$endelseif$elseIf[$get[p3f]==8]$get[p3t1] is not $get[p3t2]$endelseif$endIf
-P4: $if[[$get[p4f]==1]all $get[p4t1] is $get[p4t2]$elseIf[$get[p4f]==2]no $get[p4t1] is $get[p4t2]$endelseif$elseif[$get[p4f]==3]some $get[p4t1] is [$get[p4t2]$endelseif$elseIf[$get[p4f==4]some $get[p4t1] is not $get[p4t2]$endelseif$elseIf[$get[[p4f]==5]$get[p4t1] is $get[p4t2]$endelseif$elseIf[$get[p4f]==6]$get[p4t1] is not $get[p4t2]$endelseif$elseIf[$get[p4f]==7]$get[p4t1] is $get[p4t2]$endelseif$elseIf[$get[p4f]==8]$get[p4t1] is not $get[p4t2]$endelseif$endIf
-P5: $if[[$get[p5f]==1]all $get[p5t1] is $get[p5t2]$elseIf[$get[p5f]==2]no $get[p5t1] is $get[p5t2]$endelseif$elseif[$get[p5f]==3]some $get[p5t1] is [$get[p5t2]$endelseif$elseIf[$get[p5f==4]some $get[p5t1] is not $get[p5t2]$endelseif$elseIf[$get[[p5f]==5]$get[p5t1] is $get[p5t2]$endelseif$elseIf[$get[p5f]==6]$get[p5t1] is not $get[p5t2]$endelseif$elseIf[$get[p5f]==7]$get[p5t1] is $get[p5t2]$endelseif$elseIf[$get[p5f]==8]$get[p5t1] is not $get[p5t2]$endelseif$endIf
+P1: $if[$get[p1f]==1]all $get[p1t1] is $get[p1t2]$elseIf[$get[p1f]==2]no $get[p1t1] is $get[p1t2]$endelseif$elseif[$get[p1f]==3]some $get[p1t1] is [$get[p1t2]$endelseif$elseIf[$get[p1f==4]some $get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[[p1f]==5]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==6]$get[p1t1] is not $get[p1t2]$endelseif$elseIf[$get[p1f]==7]$get[p1t1] is $get[p1t2]$endelseif$elseIf[$get[p1f]==8]$get[p1t1] is not $get[p1t2]$endelseif$endIf
+P2: $if[$get[p2f]==1]all $get[p2t1] is $get[p2t2]$elseIf[$get[p2f]==2]no $get[p2t1] is $get[p2t2]$endelseif$elseif[$get[p2f]==3]some $get[p2t1] is [$get[p2t2]$endelseif$elseIf[$get[p2f==4]some $get[p2t1] is not $get[p2t2]$endelseif$elseIf[$get[[p2f]==5]$get[p2t1] is $get[p2t2]$endelseif$elseIf[$get[p2f]==6]$get[p2t1] is not $get[p2t2]$endelseif$elseIf[$get[p2f]==7]$get[p2t1] is $get[p2t2]$endelseif$elseIf[$get[p2f]==8]$get[p2t1] is not $get[p2t2]$endelseif$endIf
+P3: $if[$get[p3f]==1]all $get[p3t1] is $get[p3t2]$elseIf[$get[p3f]==2]no $get[p3t1] is $get[p3t2]$endelseif$elseif[$get[p3f]==3]some $get[p3t1] is [$get[p3t2]$endelseif$elseIf[$get[p3f==4]some $get[p3t1] is not $get[p3t2]$endelseif$elseIf[$get[[p3f]==5]$get[p3t1] is $get[p3t2]$endelseif$elseIf[$get[p3f]==6]$get[p3t1] is not $get[p3t2]$endelseif$elseIf[$get[p3f]==7]$get[p3t1] is $get[p3t2]$endelseif$elseIf[$get[p3f]==8]$get[p3t1] is not $get[p3t2]$endelseif$endIf
+P4: $if[$get[p4f]==1]all $get[p4t1] is $get[p4t2]$elseIf[$get[p4f]==2]no $get[p4t1] is $get[p4t2]$endelseif$elseif[$get[p4f]==3]some $get[p4t1] is [$get[p4t2]$endelseif$elseIf[$get[p4f==4]some $get[p4t1] is not $get[p4t2]$endelseif$elseIf[$get[[p4f]==5]$get[p4t1] is $get[p4t2]$endelseif$elseIf[$get[p4f]==6]$get[p4t1] is not $get[p4t2]$endelseif$elseIf[$get[p4f]==7]$get[p4t1] is $get[p4t2]$endelseif$elseIf[$get[p4f]==8]$get[p4t1] is not $get[p4t2]$endelseif$endIf
+P5: $if[$get[p5f]==1]all $get[p5t1] is $get[p5t2]$elseIf[$get[p5f]==2]no $get[p5t1] is $get[p5t2]$endelseif$elseif[$get[p5f]==3]some $get[p5t1] is [$get[p5t2]$endelseif$elseIf[$get[p5f==4]some $get[p5t1] is not $get[p5t2]$endelseif$elseIf[$get[[p5f]==5]$get[p5t1] is $get[p5t2]$endelseif$elseIf[$get[p5f]==6]$get[p5t1] is not $get[p5t2]$endelseif$elseIf[$get[p5f]==7]$get[p5t1] is $get[p5t2]$endelseif$elseIf[$get[p5f]==8]$get[p5t1] is not $get[p5t2]$endelseif$endIf
 ∴ $if[$get[cf]==1]all $get[ct1] is $get[ct2]$elseIf[$get[cf]==2]no $get[ct1] is $get[ct2]$endelseif$elseif[$get[cf]==3]some $get[ct1] is [$get[ct2]$endelseif$elseIf[$get[cf==4]some $get[ct1] is not $get[ct2]$endelseif$elseIf[$get[cf]==5]$get[ct1] is $get[ct2]$endelseif$elseIf[$get[cf]==6]$get[ct1] is not $get[ct2]$endelseif$elseIf[$get[cf]==7]$get[ct1] is $get[ct2]$endelseif$elseIf[$get[cf]==8]$get[ct1] is not $get[ct2]$endelseif$endIf]
                                              $if[$get[p1f]==1||$get[p1f]==3||$get[p1f]==5||$get[p1f]==7]
                                                  $let[rc;0]
@@ -673,17 +664,17 @@ P5: $if[[$get[p5f]==1]all $get[p5t1] is $get[p5t2]$elseIf[$get[p5f]==2]no $get[p
                                              $elseIf[$get[bc]==y]
                                                  $sendMessage[Sorry, this bot doesn't support more than 5 premises in an argument!]
                                              $endelseIf
-                                         $endIf //no to 6th premise
+                                         $endIf /* no to 6th premise */
                                      $endelseif
-                                 $endIf //no to 5th premise
+                                 $endIf /* no to 5th premise */
                              $endelseif
-                         $endIf //no to 4th premise
+                         $endIf /* no to 4th premise */
                      $endelseif
-                 $endIf //no to 3rd premise
+                 $endIf /* no to 3rd premise */
              $endelseif
-         $endIf //no to 2nd premise
+         $endIf /* no to 2nd premise */
      $endelseif
- $endIf //no to first premise. 
+ $endIf /* no to first premise. */
                                          
                                                  /*
                                                  $let[p6f;$awaitMenu[Let's create your sixth premise. What is the form of premise 6?
