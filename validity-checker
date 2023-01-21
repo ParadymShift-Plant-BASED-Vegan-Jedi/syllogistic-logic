@@ -1,36 +1,6 @@
 $objectCreate[$includeLibrary[vco]]
-$let[p1m;{menu:
-{id=p1form}]
-$let[p2m;{menu:
-{id=p2form}]
-$let[p3m;{menu:
-{id=p3form}]
-$let[p4m;{menu:
-{id=p4form}]
-$let[p5m;{menu:
-{id=p5form}]
-$let[cm;{menu:
-{id=cform}]
-$let[m_form;{placeholder=Select}
-{min=1}
-{max=1}
-{label=all A is B}
-{value=1}
-{label=no A is B}
-{value=2}
-{label=some A is B}
-{value=3}
-{label=some A is not B}
-{value=4}
-{label=x is A}
-{value=5}
-{label=x is not A}
-{value=6}
-{label=x is y}
-{value=7}
-{label=x is not y}
-{value=8}
-}]
+$function[sfm]
+    $
 $let[bc;$awaitButton[Does your argument have at least one premise?{button:Yes:GREEN::y}{button:No:RED::n};;30s;y;n]]
 $if[$get[bc]==n]
     $let[cf;$awaitMenu[What is the form of your conclusion?
